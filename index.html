@@ -62,7 +62,7 @@
         if (isSignedIn) {
           authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
-          listFiles();
+          createNewFile();
         } else {
           authorizeButton.style.display = 'block';
           signoutButton.style.display = 'none';
@@ -116,6 +116,24 @@
           }
         });
       }
+      
+    function createNewFile(  ) {
+
+    gapi.client.load('drive', 'v3', function() {
+
+       var request = gapi.client.request({
+        'path': '/drive/v3/files',
+        'method': 'POST',
+        'body':{
+            "title" : "cat.jpg",
+            "mimeType" : "image/jpeg",
+            "description" : "Some"
+         }
+     });
+
+      request.execute(function(resp) { console.log(resp); });
+   });
+}
 
     </script>
 
