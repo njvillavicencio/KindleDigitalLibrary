@@ -16,7 +16,6 @@
     <script type="text/javascript">
       // Client ID and API key from the Developer Console
       var CLIENT_ID = '983869916425-495k0u2mf6i377r6c04d1nkleek9qbbj.apps.googleusercontent.com';
-      var API_KEY = 'AIzaSyCcIlwXbAlM-dmNgISoq1TKlll4F0qNiCI';
 
       // Array of API discovery doc URLs for APIs used by the quickstart
       var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
@@ -41,7 +40,6 @@
        */
       function initClient() {
         gapi.client.init({
-          apiKey: API_KEY,
           clientId: CLIENT_ID,
           discoveryDocs: DISCOVERY_DOCS,
           scope: SCOPES
