@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<body>
+
+<button onclick='SDL()'>presiona</button>
+
+
+</body>
+<script>function SDL() {
+    var accessToken;
+    // Initialize OAuth with our key
+    OAuth.initialize('lmGlb8BaftfF4Y5en_c8XYOSq2A');
+
+   // Connect to google drive, and print out file list
+    OAuth.popup('google_drive').done(function (result) {
+    var xmlHttp = null;
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", "https://www.googleapis.com/drive/v2/files", false);
+        xmlHttp.setRequestHeader("Authorization", "Bearer " + result.access_token);
+        xmlHttp.send(null);
+        alert(xmlHttp.responseText);
+    }).fail(function (err) {
+        alert(err);
+    });;
+}
+</script>
+
+<script src="oauth.js"></script>
+</html>
