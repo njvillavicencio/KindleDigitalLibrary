@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
   </head>
   <body>
-    <p>Drive API Quickstart2</p>
+    <p>Drive API Quickstart3</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" style="display: none;">Authorize</button>
@@ -171,7 +171,9 @@
                 listFiles(file.name);
               }
               else {
+                delete2(file.id);
                 createFolder();
+                
               }
           } else {
             appendPre('No files found.');
