@@ -16,7 +16,6 @@
     <pre id="content"></pre>
 
     <script type="text/javascript">
-
       var CLIENT_ID = '983869916425-495k0u2mf6i377r6c04d1nkleek9qbbj.apps.googleusercontent.com';
       var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
       var SCOPES = 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.appfolder';
@@ -26,12 +25,10 @@
       var createButton = document.getElementById('create_button');
       var disconnectButton = document.getElementById('disconnect_button');
       var initialized=false;
-
       function handleClientLoad() {
         gapi.load('client:auth2', initClient);
        <!-- gapi.client.load('drive', 'v3'); -->
       }
-
       function initClient() {
         gapi.client.init({
           clientId: CLIENT_ID,
@@ -40,17 +37,14 @@
         }).then(function () {
           // Listen for sign-in state changes.
           gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-
           // Handle the initial sign-in state.
           updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-
           authorizeButton.onclick = handleAuthClick;
           signoutButton.onclick = handleSignoutClick;
           createButton.onclick = createFolder;
           disconnectButton.onclick = disconnect;
         });
       }
-
       /**
        *  Called when the signed in status changes, to update the UI
        *  appropriately. After a sign-in, the API is called.
@@ -68,10 +62,8 @@
           signoutButton.style.display = 'none';
           createButton.style.display = 'none';
           disconnectButton.style.display = 'none';
-
         }
       }
-
       /**
        *  Sign in the user upon button click.
        */
@@ -79,19 +71,16 @@
         initialized=true;
         gapi.auth2.getAuthInstance().signIn({ux_mode: "redirect"});
       }
-
       /**
        *  Sign out the user upon button click.
        */
       function handleSignoutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
       }
-
       function disconnect(event) {
         gapi.auth2.getAuthInstance().disconnect();
         gapi.auth2.getAuthInstance().signOut();
       }
-
       /**
        * Append a pre element to the body containing the given message
        * as its text node. Used to display the results of the API call.
@@ -103,39 +92,29 @@
         var textContent = document.createTextNode(message + '\n');
         pre.appendChild(textContent);
       }
-
       /**
        * Print files.
        */
-
-
       function delete2(fileId) {
         var request = gapi.client.drive.files.delete({
          'fileId': fileId
         });
          request.execute(function(resp) {});
       }
-
-
-
-
-
-      function fileExists(folderId) {
+      function fileExists(folderId,fileId) {
         var request = gapi.client.drive.files.get({
          'fileId': folderId
         });
         request.execute(function(response) {
           if (response.id != folderId) {
-            return False;
+            delete2(fileId);
+            createFolder();
           }
           else {
-            return True;
+            listFiles(file.name);
           }
         });
        }
-
-
-
       function listFiles(folderId) {
         gapi.client.drive.files.list({
           pageSize: 10,
@@ -150,13 +129,10 @@
               appendPre(file.name + ' (' + file.id + ')');
             }
           } else {
-            console.log(files);
             appendPre('No files found.');
           }
         });
       }
-
-
       var getAppDataFile = function () {
         gapi.client.drive.files.list({
           spaces: 'appDataFolder',
@@ -165,18 +141,13 @@
           appendPre('Files:');
           var files = response.result.files;
           if (files && files.length > 0) {
+              console.log("si hay appdata");
               var file = files[0];
               appendPre(file.name + ' (' + file.id + ')');
-              if (fileExists(file.name)) {
-                listFiles(file.name);
-              }
-              else {
-                delete2(file.id);
-                createFolder();
-                
-              }
+              fileExists(file.name,file.id);
           } else {
             appendPre('No files found.');
+            console.log("no hay appdata");
             createFolder();
           }
         });
@@ -195,8 +166,6 @@
           createAppDataFile(response.id);          
         });
       }
-
-
       var createAppDataFile = function (folderId) {
         gapi.client.drive.files.create({
           resource: {
@@ -206,8 +175,6 @@
           fields: 'id'
         }).then(function (data) {});
       };
-
-
 var getAppDataFileContent = function (fileId) {
   return gapi.client.drive.files.get({
       fileId: fileId,
@@ -220,7 +187,6 @@ var getAppDataFileContent = function (fileId) {
       };
     });
 };
-
 var saveAppData = function (fileId, appData) {
   return gapi.client.request({
     path: '/upload/drive/v3/files/' + fileId,
@@ -231,11 +197,6 @@ var saveAppData = function (fileId, appData) {
     body: JSON.stringify(appData)
   });
 };
-
-
-
-
-
     </script>
 
     <script async defer src="https://apis.google.com/js/api.js"
