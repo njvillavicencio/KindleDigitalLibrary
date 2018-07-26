@@ -52,7 +52,7 @@
        */
       function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {
-          getAppDataFile(false);
+          getAppDataFile();
           authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
           disconnectButton.style.display = 'block';
@@ -133,23 +133,20 @@
           }
         });
       }
-      function getAppDataFile(disconnect) {
+      function getAppDataFile() {
         gapi.client.drive.files.list({
           spaces: 'appDataFolder',
           fields: 'files(id,name)'
         }).then(function(response) {
           var files = response.result.files;
-          if (disconnect) {
-            deleteFile(files[0].id)    
+
+          if (files && files.length > 0) {
+              var file = files[0];
+              folderExists(file.name,file.id);
+          } else {
+            createFolder();
           }
-          else {
-            if (files && files.length > 0) {
-                var file = files[0];
-                folderExists(file.name,file.id);
-            } else {
-              createFolder();
-            }
-          }
+          
         });
       }
       
