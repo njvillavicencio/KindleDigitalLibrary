@@ -77,7 +77,7 @@
         gapi.auth2.getAuthInstance().signOut();
       }
       function disconnect(event) {
-        getAppDataFile(true);
+
         gapi.auth2.getAuthInstance().disconnect();
         gapi.auth2.getAuthInstance().signOut();
       }
