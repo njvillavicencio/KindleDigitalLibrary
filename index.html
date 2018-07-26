@@ -73,11 +73,13 @@
        */
       function handleSignoutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
+        location.reload();
       }
       function disconnect(event) {
 
         gapi.auth2.getAuthInstance().disconnect();
         gapi.auth2.getAuthInstance().signOut();
+        location.reload();
 
       }
       /**
