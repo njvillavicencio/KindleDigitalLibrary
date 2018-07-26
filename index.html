@@ -119,7 +119,7 @@
       function listFiles(folderId) {
         gapi.client.drive.files.list({
           pageSize: 10,
-          fields: "nextPageToken, files(id, name)",
+          fields: "nextPageToken, files(id, name, mimetype)",
           q: "'"+folderId+"' in parents"
         }).then(function(response) {
           appendPre('Files:');
