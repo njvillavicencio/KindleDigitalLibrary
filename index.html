@@ -21,7 +21,6 @@
       
       var authorizeButton = document.getElementById('authorize_button');
       var signoutButton = document.getElementById('signout_button');
-      var createButton = document.getElementById('create_button');
       var disconnectButton = document.getElementById('disconnect_button');
       var initialized=false;
      
@@ -42,7 +41,6 @@
           updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
           authorizeButton.onclick = handleAuthClick;
           signoutButton.onclick = handleSignoutClick;
-          createButton.onclick = createFolder;
           disconnectButton.onclick = disconnect;
         });
       }
