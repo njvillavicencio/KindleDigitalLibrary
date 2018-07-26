@@ -8,10 +8,9 @@
     <p>Drive API Quickstart3</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
-    <button id="authorize_button" style="display: none;">Authorize</button>
-    <button id="signout_button" style="display: none;">Sign Out</button>
-    <button id="create_button" style="display: none;">Crear</button>
-    <button id="disconnect_button" style="display: none;">Disconnect</button>
+    <button id="authorize_button" style="display: none;">Conectar Aplicación</button>
+    <button id="signout_button" style="display: none;">Salir de Google</button>
+    <button id="disconnect_button" style="display: none;">Desconectar Aplicación</button>
 
     <pre id="content"></pre>
 
@@ -25,10 +24,12 @@
       var createButton = document.getElementById('create_button');
       var disconnectButton = document.getElementById('disconnect_button');
       var initialized=false;
+     
       function handleClientLoad() {
         gapi.load('client:auth2', initClient);
        <!-- gapi.client.load('drive', 'v3'); -->
       }
+       
       function initClient() {
         gapi.client.init({
           clientId: CLIENT_ID,
@@ -54,13 +55,11 @@
           getAppDataFile();
           authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
-          createButton.style.display = 'block';
           disconnectButton.style.display = 'block';
         } 
         else {
           authorizeButton.style.display = 'block';
           signoutButton.style.display = 'none';
-          createButton.style.display = 'none';
           disconnectButton.style.display = 'none';
         }
       }
@@ -95,19 +94,19 @@
       /**
        * Print files.
        */
-      function delete2(fileId) {
+      function deleteFiles(fileId) {
         var request = gapi.client.drive.files.delete({
          'fileId': fileId
         });
-         request.execute(function(resp) {});
+         request.execute(function(response) {});
       }
-      function fileExists(folderId,fileId) {
+      function folderExists(folderId,fileId) {
         var request = gapi.client.drive.files.get({
          'fileId': folderId
         });
         request.execute(function(response) {
           if (response.id != folderId) {
-            delete2(fileId);
+            deleteFiles(fileId);
             createFolder();
           }
           else {
@@ -133,7 +132,7 @@
           }
         });
       }
-      var getAppDataFile = function () {
+      function getAppDataFile() {
         gapi.client.drive.files.list({
           spaces: 'appDataFolder',
           fields: 'files(id,name)'
@@ -141,13 +140,9 @@
           appendPre('Files:');
           var files = response.result.files;
           if (files && files.length > 0) {
-              console.log("si hay appdata");
               var file = files[0];
-              appendPre(file.name + ' (' + file.id + ')');
-              fileExists(file.name,file.id);
+              folderExists(file.name,file.id);
           } else {
-            appendPre('No files found.');
-            console.log("no hay appdata");
             createFolder();
           }
         });
@@ -166,7 +161,7 @@
           createAppDataFile(response.id);          
         });
       }
-      var createAppDataFile = function (folderId) {
+      function createAppDataFile(folderId) {
         gapi.client.drive.files.create({
           resource: {
             name: folderId,
@@ -175,28 +170,6 @@
           fields: 'id'
         }).then(function (data) {});
       };
-var getAppDataFileContent = function (fileId) {
-  return gapi.client.drive.files.get({
-      fileId: fileId,
-      // Download a file — files.get with alt=media file resource
-      alt: 'media'
-    }).then(function (data) {
-      return {
-        fileId: fileId,
-        appData: data.result
-      };
-    });
-};
-var saveAppData = function (fileId, appData) {
-  return gapi.client.request({
-    path: '/upload/drive/v3/files/' + fileId,
-    method: 'PATCH',
-    params: {
-      uploadType: 'media'
-    },
-    body: JSON.stringify(appData)
-  });
-};
     </script>
 
     <script async defer src="https://apis.google.com/js/api.js"
