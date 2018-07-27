@@ -1,18 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Drive API Quickstart</title>
+    <title>Libros</title>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="estilo.css" />
+    <link rel="icon" sizes="200x200" type="image/png" href="books.png">
   </head>
   <body>
-    <p>Drive API Quickstart4</p>
-
+    <h1 align="center">Mis libros</h1>
+    <br />
+    <div align="center">
+    <input type="text" id="Consulta" onkeyup="myFunction()" placeholder="Buscar un libro..." title="Escribe un titulo o autor">
+    </div>
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" style="display: none;">Conectar Aplicación</button>
     <button id="signout_button" style="display: none;">Salir de Google</button>
     <button id="disconnect_button" style="display: none;">Desconectar Aplicación</button>
 
     <pre id="content"></pre>
+
+<table id="Libros">
+  <tr class="header">
+    <th></th>
+    <th>Título</th>
+    <th>Autor</th>
+    <th>Año</th>
+    <th>Género</th>
+    <th>Formato</th>
+  </tr>
+</table>
 
     <script type="text/javascript">
       var CLIENT_ID = '983869916425-495k0u2mf6i377r6c04d1nkleek9qbbj.apps.googleusercontent.com';
@@ -76,11 +92,9 @@
         location.reload();
       }
       function disconnect(event) {
-
         gapi.auth2.getAuthInstance().disconnect();
         gapi.auth2.getAuthInstance().signOut();
         location.reload();
-
       }
       /**
        * Append a pre element to the body containing the given message
@@ -116,25 +130,47 @@
           }
         });
        }
-      function listFiles(folderId) {
-        gapi.client.drive.files.list({
-          pageSize: 10,
-          fields: "nextPageToken, files(id, name, mimeType)",
-          q: "'"+folderId+"' in parents"
-        }).then(function(response) {
-          var files = response.result.files;
-          if (files && files.length > 0) {
+
+      function buildJson(files) {
+            var tableRow={"bookCover": "", "mobi": "", "azw3": ""};
             for (var i = 0; i < files.length; i++) {
               var file = files[i];
               if (file.mimeType == "application/vnd.google-apps.folder") {
                 listFiles(file.id);
               }
               else {
-                appendPre(file.name + ' (' + file.id + ')');
+                linkString="https://drive.google.com/a/uc.cl/uc?id=";
+                linkString2="&export=download";
+                if (file.fileExtension == "mobi") {
+                   tableRow.mobi=file.id;
+  
+                }
+                else if (file.fileExtension == "azw3") {
+                   tableRow.azw3=file.id;
+                   tableRow.name=file.name;
+                }
+                else if (file.mimeType == "image/jpeg") {
+                   tableRow.bookCover=linkString+file.id+linkString2;
+  
+                }
               }
             }
-          } else {
-            appendPre('No files found.');
+            if (tableRow.mobi!="" || tableRow.azw3!=""){
+              appendRow(tableRow);
+            }
+          }
+      
+
+
+      function listFiles(folderId) {
+        gapi.client.drive.files.list({
+          pageSize: 10,
+          fields: "nextPageToken, files(id, name, mimeType, fileExtension)",
+          q: "'"+folderId+"' in parents"
+        }).then(function(response) {
+          var files = response.result.files;
+          if (files && files.length > 0) {
+            buildJson(files)
           }
         });
       }
@@ -144,7 +180,6 @@
           fields: 'files(id,name)'
         }).then(function(response) {
           var files = response.result.files;
-
           if (files && files.length > 0) {
               var file = files[0];
               folderExists(file.name,file.id);
@@ -178,6 +213,58 @@
         }).then(function (data) {});
         listFiles(folderId);
       };
+
+    function appendRow(tableRow) {
+      var table = document.getElementById("Libros");
+      var row = table.insertRow(-1);
+
+      var cell0 = row.insertCell(0);
+      var cell1 = row.insertCell(1);
+      var cell2 = row.insertCell(2);
+      var cell3 = row.insertCell(3);
+      var cell4 = row.insertCell(4);
+      var cell5 = row.insertCell(5);
+      cell0.innerHTML= "<img width='62' height='72' src='"+tableRow.bookCover+"'/>";
+      cell1.innerHTML= "<a href='"+tableRow.bookCover+"'>"+ tableRow.name +"</a>";
+      cell2.innerHTML = "NEW CELL1";
+      cell3.innerHTML = "NEW CELL2";
+      cell4.innerHTML = "NEW CELL3";
+      var fileTypes="";
+      if (tableRow.azw3!=""){
+        fileTypes+="<a id='"+tableRow.azw3+"' href='"+tableRow.bookCover+"'>.AZW3</a> "
+      }
+      if (tableRow.mobi!=""){
+        fileTypes+="<a id='"+tableRow.mobi+"' href='"+tableRow.bookCover+"'>.MOBI</a>"
+      }
+      cell5.innerHTML = fileTypes;
+    }
+
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("Consulta");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("Libros");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td1 = tr[i].getElementsByTagName("td")[1];
+    td2 = tr[i].getElementsByTagName("td")[2];
+    td3 = tr[i].getElementsByTagName("td")[3];
+    td4 = tr[i].getElementsByTagName("td")[4];    
+    if (td1 || td2 || td3 || td4) {
+      if (td1.innerHTML.toUpperCase().indexOf(filter) > -1 || td2.innerHTML.toUpperCase().indexOf(filter) > -1 || td3.innerHTML.toUpperCase().indexOf(filter) > -1 || td4.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+
+  }
+}
+
+function myFunction2(clickedID) {
+  document.getElementById("Consulta").value=document.getElementById(clickedID).innerHTML;
+  myFunction();
+}
     </script>
 
     <script async defer src="https://apis.google.com/js/api.js"
