@@ -270,7 +270,7 @@ function myFunction2(clickedElement) {
 
    function readMetadata(bookInfo) {
      console.log(bookInfo.opf);
-     var metaData={"title":"","creator":"","date":"","description":"","subject":[]};
+     var metaData={"title":"-","creator":"-","date":"-","description":"-","subject":["-"]};
      if (bookInfo.opf!=""){
      var request=gapi.client.request( { 
     'path': '/drive/v3/files/'+bookInfo.opf,
