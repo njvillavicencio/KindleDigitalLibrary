@@ -87,6 +87,8 @@ input {
 
 img {
     border-radius: 7%;
+    width:56px;
+    height:auto;
 }
 
 header {
