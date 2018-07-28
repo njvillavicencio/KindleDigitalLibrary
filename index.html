@@ -16,7 +16,6 @@
     <button id="authorize_button" style="display: none;">Conectar Aplicación</button>
     <button id="signout_button" style="display: none;">Salir de Google</button>
     <button id="disconnect_button" style="display: none;">Desconectar Aplicación</button>
-
     <pre id="content"></pre>
 
 <table id="Libros">
@@ -25,7 +24,7 @@
     <th>Título</th>
     <th>Autor</th>
     <th>Año</th>
-    <th>Género</th>
+    <th>Géneros</th>
     <th>Formato</th>
   </tr>
 </table>
@@ -130,42 +129,38 @@
           }
         });
        }
-
       function buildJson(files) {
-            var tableRow={"bookCover": "", "mobi": "", "azw3": ""};
+            var bookInfo={"cover": "", "mobi": "", "azw3": "", "opf": ""};
+            var metadata={"title":"","creator":"","date":"","description":"","subject":[]};
             for (var i = 0; i < files.length; i++) {
               var file = files[i];
               if (file.mimeType == "application/vnd.google-apps.folder") {
                 listFiles(file.id);
               }
               else {
-                linkString="https://drive.google.com/a/uc.cl/uc?id=";
-                linkString2="&export=download";
                 if (file.fileExtension == "mobi") {
-                   tableRow.mobi=file.id;
-  
+                   bookInfo.mobi=file.webContentLink;
                 }
                 else if (file.fileExtension == "azw3") {
-                   tableRow.azw3=file.id;
-                   tableRow.name=file.name;
+                   bookInfo.azw3=file.webContentLink;
                 }
                 else if (file.mimeType == "image/jpeg") {
-                   tableRow.bookCover=linkString+file.id+linkString2;
-  
+                   bookInfo.cover=file.webContentLink;
+                }
+                else if (file.fileExtension == "opf") {
+                   bookInfo.opf=file.id;
                 }
               }
             }
-            if (tableRow.mobi!="" || tableRow.azw3!=""){
-              appendRow(tableRow);
+            if (bookInfo.mobi!="" || bookInfo.azw3!=""){
+              readMetadata(bookInfo);
             }
           }
       
-
-
       function listFiles(folderId) {
         gapi.client.drive.files.list({
           pageSize: 10,
-          fields: "nextPageToken, files(id, name, mimeType, fileExtension)",
+          fields: "nextPageToken, files(id, name, mimeType, fileExtension, webContentLink)",
           q: "'"+folderId+"' in parents"
         }).then(function(response) {
           var files = response.result.files;
@@ -214,29 +209,36 @@
         listFiles(folderId);
       };
 
-    function appendRow(tableRow) {
+
+    function appendRow(bookInfo,metaData) {
       var table = document.getElementById("Libros");
       var row = table.insertRow(-1);
-
       var cell0 = row.insertCell(0);
       var cell1 = row.insertCell(1);
       var cell2 = row.insertCell(2);
       var cell3 = row.insertCell(3);
       var cell4 = row.insertCell(4);
       var cell5 = row.insertCell(5);
-      cell0.innerHTML= "<img width='62' height='72' src='"+tableRow.bookCover+"'/>";
-      cell1.innerHTML= "<a href='"+tableRow.bookCover+"'>"+ tableRow.name +"</a>";
-      cell2.innerHTML = "NEW CELL1";
-      cell3.innerHTML = "NEW CELL2";
-      cell4.innerHTML = "NEW CELL3";
+      cell0.innerHTML= "<img width='62' height='72' src='"+bookInfo.cover+"'/>";
       var fileTypes="";
-      if (tableRow.azw3!=""){
-        fileTypes+="<a id='"+tableRow.azw3+"' href='"+tableRow.bookCover+"'>.AZW3</a> "
+      if (bookInfo.azw3!=""){
+        fileTypes+="<a href='"+bookInfo.azw3+"'>azw3</a> ";
       }
-      if (tableRow.mobi!=""){
-        fileTypes+="<a id='"+tableRow.mobi+"' href='"+tableRow.bookCover+"'>.MOBI</a>"
+      if (bookInfo.mobi!=""){
+        fileTypes+="<a href='"+bookInfo.mobi+"'>mobi</a>";
       }
       cell5.innerHTML = fileTypes;
+
+     if (bookInfo.opf!=""){
+       cell1.innerHTML= "<a onclick='myFunction2(this)' href='#Consulta'>"+ metaData.title +"</a>";
+       cell2.innerHTML= "<a onclick='myFunction2(this)' href='#Consulta'>"+ metaData.creator +"</a>";
+       cell3.innerHTML= "<a onclick='myFunction2(this)' href='#Consulta'>"+ metaData.date +"</a>";
+       subjects="";
+       for (i = 0; i < metaData.subject.length; i++) {
+         subjects+="<a onclick='myFunction2(this)' href='#Consulta'>"+metaData.subject[i]+"</a> ";
+       }
+       cell4.innerHTML= subjects;
+     }
     }
 
 function myFunction() {
@@ -257,14 +259,60 @@ function myFunction() {
         tr[i].style.display = "none";
       }
     }
-
   }
 }
 
-function myFunction2(clickedID) {
-  document.getElementById("Consulta").value=document.getElementById(clickedID).innerHTML;
+function myFunction2(clickedElement) {
+  document.getElementById("Consulta").value=clickedElement.innerHTML;
   myFunction();
 }
+
+
+   function readMetadata(bookInfo) {
+     console.log(bookInfo.opf);
+     var metaData={"title":"","creator":"","date":"","description":"","subject":[]};
+     if (bookInfo.opf!=""){
+     var request=gapi.client.request( { 
+    'path': '/drive/v3/files/'+bookInfo.opf,
+    'method': 'GET',
+    'params': {'fileId': bookInfo.opf, 'alt': 'media'},
+    'headers': {'Authorization': 'Bearer ' + gapi.auth.getToken().access_token }
+    });
+    request.execute(function(jsonResp,rawResp) {
+      var respObject = JSON.parse(rawResp); // rawResp is encoded JSON string with header, body, etc.
+      var str3 = respObject.gapiRequest.data.body;
+      var str2=str3.split("\n");
+        for (i = 0; i < str2.length; i++) { 
+          var str=str2[i];
+          var inicio= str.indexOf("</dc:")+5;
+          var fin = str.indexOf(">", str.indexOf(">")+1);
+          var element = str.substring(inicio, fin);
+          if (Object.keys(metaData).indexOf(element)> -1) {
+            var inicio= str.indexOf(">")+1;
+            var fin= str.indexOf("</"); 
+            if (inicio >-1 && fin >-1) {
+              var result = str.substring(inicio, fin);
+              if (element=="subject") {
+                metaData[element].push(result);
+              }
+              else if (element=="date"){
+                metaData[element]=result.substring(0,4);
+              }
+              else {
+                metaData[element]=result;
+              }
+            }
+          }
+        }
+        appendRow(bookInfo,metaData);
+      });
+     }
+     else{
+       appendRow(bookInfo,metaData);
+     }
+    }
+
+
     </script>
 
     <script async defer src="https://apis.google.com/js/api.js"
