@@ -242,7 +242,16 @@
         });
       }
 
-
+      var input = document.getElementById("Consulta");
+      input.addEventListener("keyup", function(event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+          var query = "name contains '"+input.value+"'";
+          currDirectory="<a href='#' onclick='navigationMenu(this.id,"+"root"+")' id='root'>Mi unidad</a> > Resultados de la búsqueda";
+          document.getElementById("folders").innerHTML=currDirectory;
+          destroyTable(query);
+        }
+      });
 
     </script>
 
