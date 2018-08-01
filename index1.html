@@ -203,7 +203,7 @@
       var cell4 = row.insertCell(4);
       var cell5 = row.insertCell(5);
       var row2 = table2.insertRow(-1);
-      row2.insertCell(0).innerHTML="<img width='260' src='"+bookInfo.cover+"'/>";
+      row2.insertCell(0).innerHTML=bookInfo.cover;
 
       cell0.innerHTML= "<img width='40' src='./book.png'/>";
       <!-- cell0.innerHTML= "<img width='56' src='"+bookInfo.cover+"'/>"; -->
@@ -321,6 +321,7 @@
     // When the user clicks on the button, open the modal 
     function displayModal(title) {
         var row=document.getElementById(title.innerHTML);
+	row.cells[0].innerHTML="<img width='260' src='"+row.cells[0].innerHTML+"'/>";
         document.getElementById("bookInfo").innerHTML = "<table id='LibroEl'>"+row.innerHTML+"</table>";
         modal.style.display = "block";
     }
