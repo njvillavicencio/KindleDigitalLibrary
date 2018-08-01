@@ -61,7 +61,6 @@
           authorizeButton.onclick = handleAuthClick;
           signoutButton.onclick = handleSignoutClick;
           disconnectButton.onclick = disconnect;
-          listFiles("","'root' in parents and (mimeType = 'application/vnd.google-apps.folder' or fileExtension = 'azw3' or fileExtension = 'mobi')");
         });
       }
       /**
@@ -74,6 +73,7 @@
           authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
           disconnectButton.style.display = 'block';
+          listFiles("","'root' in parents and (mimeType = 'application/vnd.google-apps.folder' or fileExtension = 'azw3' or fileExtension = 'mobi')");
         } 
         else {
           authorizeButton.style.display = 'block';
