@@ -7,7 +7,7 @@
     <link rel="icon" sizes="200x200" type="image/png" href="books.png">
   </head>
   <body>
-    <h1 align="center">Mis libros6</h1>
+    <h1 align="center">Mis libros7</h1>
     <br />
     <div align="center">
     <input type="text" id="Consulta" placeholder="Buscar en Drive" title="Busqueda">
@@ -178,6 +178,14 @@
         anchor.href = link;
         anchor.target = '_blank';
         anchor.click();
+      }
+        
+      function destroyTable(query) {
+        var table = document.getElementById("Libros");
+        var rows = table.rows.length;
+        for (var i = 1; i < rows; i++) {
+          table.deleteRow(1);
+        }
       }
 
     </script>
