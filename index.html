@@ -7,7 +7,7 @@
     <link rel="icon" sizes="200x200" type="image/png" href="books.png">
   </head>
   <body>
-    <h1 align="center">Mis libros2</h1>
+    <h1 align="center">Mis libros</h1>
     <br />
     <div align="center">
     <input type="text" id="Consulta" placeholder="Buscar en Drive" title="Busqueda">
@@ -185,11 +185,20 @@
           navFolders[folderId]=[Object.keys(navFolders).length,folderName];
           navFolders2[Object.keys(navFolders2).length]=[folderId,folderName];
         }
-
-
-
-
-
+        navFoldersKeys=Object.keys(navFolders);
+        for (var i=0; i<navFoldersKeys.length ; i++) {
+          id=navFoldersKeys[i];
+          if (navFolders[id][0]> navFolders[folderId][0]){
+            delete navFolders2[navFolders[id][0]]
+            delete navFolders[id];
+          }
+        }
+        for (var id of Object.keys(navFolders)) {
+          if (navFolders[id][0]> navFolders[folderId][0]){
+            delete navFolders2[navFolders[id][0]]
+            delete navFolders[id];
+          }
+        }
         currDirectory="";
         for (var i = 0; i<Object.keys(navFolders2).length ; i++) {
             if (i>0) { 
