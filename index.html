@@ -7,7 +7,7 @@
     <link rel="icon" sizes="200x200" type="image/png" href="books.png">
   </head>
   <body>
-    <h1 align="center">Mis libros4</h1>
+    <h1 align="center">Mis libros5</h1>
     <br />
     <div align="center">
     <input type="text" id="Consulta" placeholder="Buscar en Drive" title="Busqueda">
@@ -206,17 +206,8 @@
         }
         document.getElementById("folders").innerHTML=currDirectory;
         var query = "'"+folderId+"' in parents and (mimeType = 'application/vnd.google-apps.folder' or fileExtension = 'azw3' or fileExtension = 'mobi')";
-        destroyTable(query);
       }
 
-      function destroyTable(query) {
-        var table = document.getElementById("Libros");
-        var rows = table.rows.length;
-        for (var i = 1; i < rows; i++) {
-          table.deleteRow(1);
-        }
-
-      }
     </script>
 
     <script async defer src="https://apis.google.com/js/api.js"
