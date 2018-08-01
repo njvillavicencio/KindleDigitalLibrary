@@ -20,7 +20,7 @@
 
 	<table id="Libros">
 	  <tr class="header">
-	    <th></th>
+	    <th ></th>
 	    <th>Título</th>
 	    <th>Autor</th>
 	    <th>Año</th>
@@ -29,6 +29,18 @@
 	  </tr>
 	</table>
   <a href="#" id="nextPage" style="display: none;" >Ver más &raquo;</a>
+
+    <table style="display:none;" id="Libro">
+    </table>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p id="bookInfo"> <p>
+  </div>
+</div>
+
+
     <script type="text/javascript">
       var CLIENT_ID = '983869916425-495k0u2mf6i377r6c04d1nkleek9qbbj.apps.googleusercontent.com';
       var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
@@ -69,7 +81,7 @@
           authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
           disconnectButton.style.display = 'block';
-	  listFiles("","fileExtension = 'opf'");  <!-- si cambia usar name contains '.opf' -->	
+          listFiles("","fileExtension = 'opf'");  <!-- si cambia usar name contains '.opf' -->
 
         } 
         else {
@@ -182,6 +194,7 @@
 
     function appendRow(bookInfo,metaData) {
       var table = document.getElementById("Libros");
+      var table2 = document.getElementById("Libro");
       var row = table.insertRow(-1);
       var cell0 = row.insertCell(0);
       var cell1 = row.insertCell(1);
@@ -189,7 +202,11 @@
       var cell3 = row.insertCell(3);
       var cell4 = row.insertCell(4);
       var cell5 = row.insertCell(5);
-      cell0.innerHTML= "<img width='56' src='"+bookInfo.cover+"'/>";
+      var row2 = table2.insertRow(-1);
+      row2.insertCell(0).innerHTML="<img width='260' src='"+bookInfo.cover+"'/>";
+
+      cell0.innerHTML= "<img width='40' src='./book.png'/>";
+      <!-- cell0.innerHTML= "<img width='56' src='"+bookInfo.cover+"'/>"; -->
       var fileTypes="";
       if (bookInfo.azw3!=""){
         fileTypes+="<a href='"+bookInfo.azw3+"'>.azw3</a> ";
@@ -200,9 +217,10 @@
       cell5.innerHTML = fileTypes;
 
      if (bookInfo.opf!=""){
-       cell1.innerHTML= "<a onclick='inputQuery(this)' href='#Consulta'>"+ metaData.title +"</a>"
+       cell1.innerHTML= "<a onclick='displayModal(this)' href='#Consulta'>"+ metaData.title +"</a>"
+       row2.id=metaData.title;
        if (metaData.seriesTitle!=""){
-         cell1.innerHTML= "<a onclick='inputQuery(this)' href='#Consulta'>"+ metaData.title +"</a>"+"<em><br>Serie: <a onclick='inputQuery(this)' href='#Consulta'>"+ metaData.seriesTitle +"</a> "+"("+metaData.seriesIndex+")</em>" ;
+         cell1.innerHTML= "<a onclick='displayModal(this)' href='#Consulta'>"+ metaData.title +"</a>"+"<em><br>Serie: <a onclick='inputQuery(this)' href='#Consulta'>"+ metaData.seriesTitle +"</a> "+"("+metaData.seriesIndex+")</em>" ;
        }
        cell2.innerHTML= "<a onclick='inputQuery(this)' href='#Consulta'>"+ metaData.creator +"</a>";
        cell3.innerHTML= "<a onclick='inputQuery(this)' href='#Consulta'>"+ metaData.date +"</a>";
@@ -216,6 +234,7 @@
          }
        }
        cell4.innerHTML= subjects;
+       row2.insertCell(1).innerHTML="<td valign='top' align='center'> <h1>"+metaData.title+"</h1> <br> <p align='justify'>"+metaData.description+"</p></td>";
      }
     }
 
@@ -296,7 +315,27 @@
      }
     }
 
+    var modal = document.getElementById('myModal');
+    var span = document.getElementsByClassName("close")[0];
 
+    // When the user clicks on the button, open the modal 
+    function displayModal(title) {
+        var row=document.getElementById(title.innerHTML);
+        document.getElementById("bookInfo").innerHTML = "<table id='LibroEl'>"+row.innerHTML+"</table>";
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
     </script>
 
     <script async defer src="https://apis.google.com/js/api.js"
