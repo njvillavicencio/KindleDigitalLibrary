@@ -107,12 +107,12 @@
       }
 
       function buildJson(files) {
-            for (var i = 0; i < files.length; i++) {
-              var file = files[i];
-              folderId = file.parents[0];
-              var query="'"+folderId+"' in parents";
-              listFiles("",query); 
-            }
+        for (var i = 0; i < files.length; i++) {
+          var file = files[i];
+          folderId = file.parents[0];
+          var query="'"+folderId+"' in parents";
+          listFiles("",query); 
+        }
       }
 
       function buildJson2(files) {
@@ -131,8 +131,7 @@
           }
           else if (file.fileExtension == "opf") {
             bookInfo.opf=file.id;
-          }
-              
+          }            
         }
         if (bookInfo.mobi!="" || bookInfo.azw3!=""){
           readMetadata(bookInfo);
@@ -230,7 +229,6 @@
 	document.getElementById("Consulta").value=clickedElement.innerHTML;
 	filterTable();
       }
-
 
       function readMetadata(bookInfo) {
         var metaData={"title":"","creator":"","date":"","description":"","subject":[],"seriesTitle":"", "seriesIndex": ""};
