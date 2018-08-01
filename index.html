@@ -193,12 +193,6 @@
             delete navFolders[id];
           }
         }
-        for (var id of Object.keys(navFolders)) {
-          if (navFolders[id][0]> navFolders[folderId][0]){
-            delete navFolders2[navFolders[id][0]]
-            delete navFolders[id];
-          }
-        }
         currDirectory="";
         for (var i = 0; i<Object.keys(navFolders2).length ; i++) {
             if (i>0) { 
