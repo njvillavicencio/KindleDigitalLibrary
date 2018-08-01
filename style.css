@@ -70,8 +70,13 @@ img {
   height:auto;
 }
 
-td {
+#Libros td {
   text-align: left;
+  padding: 12px;
+}
+
+#LibroEl td {
+  text-align: center;
   padding: 12px;
 }
 
