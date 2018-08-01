@@ -7,7 +7,7 @@
     <link rel="icon" sizes="200x200" type="image/png" href="books.png">
   </head>
   <body>
-    <h1 align="center">Mis libros7</h1>
+    <h1 align="center">Mis libros8</h1>
     <br />
     <div align="center">
     <input type="text" id="Consulta" placeholder="Buscar en Drive" title="Busqueda">
@@ -187,6 +187,42 @@
           table.deleteRow(1);
         }
       }
+      
+      function listFiles(nextPageToken,query) {
+        gapi.client.drive.files.list({
+          pageSize: 50,          
+          includeTeamDrives : true,
+          'pageToken': nextPageToken,    
+          fields: "nextPageToken, files(id, name, mimeType, fileExtension, webContentLink, size, owners, modifiedTime, shared,lastModifyingUser)",
+          q: query
+        }).then(function(response) {
+          var files = response.result.files;
+          
+          if (files && files.length > 0) {
+            buildJson(files)
+          }
+          var nextPage = document.getElementById("nextPage");
+          if (response.result.nextPageToken){
+            nextPage.style.display="block";
+            nextPage.setAttribute("onclick","listFiles('"+response.result.nextPageToken+"',"+'"'+query+'"'+")");
+          }
+          else{
+            nextPage.style.display="none";
+            
+          }
+        });
+      }
+
+      var input = document.getElementById("Consulta");
+      input.addEventListener("keyup", function(event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+          var query = "name contains '"+input.value+"'";
+          currDirectory="<a href='#' onclick='navigationMenu(this.id,"+"root"+")' id='root'>Mi unidad</a> > Resultados de la búsqueda";
+          document.getElementById("folders").innerHTML=currDirectory;
+          destroyTable(query);
+        }
+      });
 
     </script>
 
