@@ -321,7 +321,7 @@
     // When the user clicks on the button, open the modal 
     function displayModal(title) {
         var row=document.getElementById(title.innerHTML);
-	if (row.cells[0].innerHTML.indexOf("<img width='260' src='") == -1){
+	if (row.cells[0].innerHTML.indexOf("<img ") == -1){
 	  row.cells[0].innerHTML="<img width='260' src='"+row.cells[0].innerHTML+"'/>";
 	}
         document.getElementById("bookInfo").innerHTML = "<table id='LibroEl'>"+row.innerHTML+"</table>";
