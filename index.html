@@ -7,7 +7,7 @@
     <link rel="icon" sizes="200x200" type="image/png" href="books.png">
   </head>
   <body>
-    <h1 align="center">Mis libros3</h1>
+    <h1 align="center">Mis libros4</h1>
     <br />
     <div align="center">
     <input type="text" id="Consulta" placeholder="Buscar en Drive" title="Busqueda">
@@ -74,6 +74,7 @@
           authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
           disconnectButton.style.display = 'block';
+         
         } 
         else {
           authorizeButton.style.display = 'block';
@@ -115,7 +116,63 @@
       var navFolders={"root": [0,"Mi unidad"]};
       var currDirectory="<a href='#' onclick='navigationMenu(this.id,"+"root"+")' id='root'>Mi unidad</a>";
       document.getElementById("folders").innerHTML=currDirectory;
+        
+      function buildJson(files) {
+            for (var i = 0; i < files.length; i++) {
+              var file = files[i];
+              if (file.mimeType == "application/vnd.google-apps.folder" || file.fileExtension == "mobi" || file.fileExtension == "azw3") {
+                var table = document.getElementById("Libros");
+                var row = table.insertRow(-1);
+                var cell0 = row.insertCell(0);
+                var cell1 = row.insertCell(1);
+                var cell2 = row.insertCell(2);
+                owner="";
+                for (var j=0; j < file.owners.length; j++){
+                  if (file.owners[j].me){
+                    owner = "yo";
+                    break;
+                  }
+                  else {
+                    owner = owner + file.owners[j].displayName;
+                  }
+                }
+                cell2.innerHTML=owner;
 
+                if (file.lastModifyingUser.me) {
+                  row.insertCell(3).innerHTML=file.modifiedTime.substring(0,10)+ " yo";
+                }
+                else {
+                  row.insertCell(3).innerHTML=file.modifiedTime.substring(0,10)+ " " + file.lastModifyingUser.displayName;
+                }
+                row.id=file.id;
+                if (file.mimeType == "application/vnd.google-apps.folder") {
+                  row.setAttribute("onclick","navigationMenu(this.id,'"+file.name+"')");
+                  if (file.shared){
+                    cell0.innerHTML="<img width='40' heigth='40' src='./sfi.png'/> ";
+                  }
+                  else {
+                    cell0.innerHTML="<img width='40' heigth='40' src='./fi.png'/> ";
+                  }
+                  cell1.innerHTML=file.name;
+                  row.insertCell(4).innerHTML="-";
+                }
+                else if (file.fileExtension == "mobi" || file.fileExtension == "azw3" ) {
+                  row.setAttribute("onclick","download('"+file.webContentLink+"')");
+                  cell0.innerHTML="<img width='37' heigth='37' src='./book.png'/>";
+                  cell1.innerHTML=file.name;
+
+                  
+                  if (file.size/1000000 > 1){
+                    row.insertCell(4).innerHTML=file.size/1000000 + " MB";
+                  }
+                  else {
+                    row.insertCell(4).innerHTML=file.size/1000 + " KB";
+                }
+                }
+              }
+            }
+
+          }
 
     </script>
 
