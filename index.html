@@ -70,7 +70,7 @@
        */
       function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {
-          listFiles("","'root' in parents and (mimeType = 'application/vnd.google-apps.folder' or fileExtension = 'azw3' or fileExtension = 'mobi')");
+          
           authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
           disconnectButton.style.display = 'block';
