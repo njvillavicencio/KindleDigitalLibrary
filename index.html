@@ -7,7 +7,7 @@
     <link rel="icon" sizes="200x200" type="image/png" href="books.png">
   </head>
   <body>
-    <h1 align="center">Mis libros</h1>
+    <h1 align="center">Mis libros2</h1>
     <br />
     <div align="center">
     <input type="text" id="Consulta" placeholder="Buscar en Drive" title="Busqueda">
@@ -179,7 +179,31 @@
         anchor.target = '_blank';
         anchor.click();
       }
+        
+      function navigationMenu(folderId, folderName){
+        if (Object.keys(navFolders).indexOf(folderId)==-1){
+          navFolders[folderId]=[Object.keys(navFolders).length,folderName];
+          navFolders2[Object.keys(navFolders2).length]=[folderId,folderName];
+        }
 
+
+
+
+
+        currDirectory="";
+        for (var i = 0; i<Object.keys(navFolders2).length ; i++) {
+            if (i>0) { 
+              currDirectory+=" > "+"<a href='#' onclick='navigationMenu(this.id,this.innerHTML)' id='"+ navFolders2[i][0]+"'>" +navFolders2[i][1] +"</a>";
+              }
+            else {
+              currDirectory="<a href='#' onclick='navigationMenu(this.id,this.innerHTML)' id='"+ navFolders2[i][0]+"'>" +navFolders2[i][1] +"</a>";
+            }
+        }
+        document.getElementById("folders").innerHTML=currDirectory;
+        var query = "'"+folderId+"' in parents and (mimeType = 'application/vnd.google-apps.folder' or fileExtension = 'azw3' or fileExtension = 'mobi')";
+        destroyTable(query);
+      }
+        
 
 
       function destroyTable(query) {
