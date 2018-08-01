@@ -31,7 +31,7 @@
       <th>Tamaño del archivo</th>
     </tr>
   </table>
-  <a href="#" id="nextPage" style="display: block;" >Ver más</a>
+  <a href="#" id="nextPage" style="display: none;" >Ver más</a>
 
     <script type="text/javascript">
       var CLIENT_ID = '983869916425-495k0u2mf6i377r6c04d1nkleek9qbbj.apps.googleusercontent.com';
@@ -41,7 +41,6 @@
       var authorizeButton = document.getElementById('authorize_button');
       var signoutButton = document.getElementById('signout_button');
       var disconnectButton = document.getElementById('disconnect_button');
-      var initialized=false;
 
       function handleClientLoad() {
         gapi.load('client:auth2', initClient);
@@ -85,7 +84,6 @@
        *  Sign in the user upon button click.
        */
       function handleAuthClick(event) {
-        initialized=true;
         gapi.auth2.getAuthInstance().signIn({ux_mode: "redirect"});
       }
       /**
@@ -244,16 +242,7 @@
         });
       }
 
-      var input = document.getElementById("Consulta");
-      input.addEventListener("keyup", function(event) {
-        event.preventDefault();
-        if (event.keyCode === 13) {
-          var query = "name contains '"+input.value+"'";
-          currDirectory="<a href='#' onclick='navigationMenu(this.id,"+"root"+")' id='root'>Mi unidad</a> > Resultados de la búsqueda";
-          document.getElementById("folders").innerHTML=currDirectory;
-          destroyTable(query);
-        }
-      });
+
 
     </script>
 
