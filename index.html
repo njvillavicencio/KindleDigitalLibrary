@@ -5,10 +5,22 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" sizes="200x200" type="image/png" href="books.png">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" type="text/css">
   </head>
   <body>
-    <h1 align="center">Kindle Digital Library</h1>
-    <br />
+    <nav class="topnav">
+    <a href="./index.html">Home</a> 
+  <a href="./index1.html">Library</a>
+  <a href="./index2.html">Drive</a>
+</nav>
+    <div style="line-height:10px">
+    <a href="./index.html"><img id="reader" src="ereader.png" width = 52px style='float: left;'/></a>
+    <h1><span class="black"><a href="./index.html">kindle</a></span></h1>
+    <h1><a href="./index.html"><span class="grey">Digital</span> <span class="grey-light">Library </span></a></h1>
+    </div>
+        <h2>Directly from the Cloud</h2>
+    <br/>
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" style="display: none;">Conectar Aplicación</button>
     <button id="signout_button" style="display: none;">Salir de Google</button>
