@@ -5,9 +5,21 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" sizes="200x200" type="image/png" href="books.png">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" type="text/css">
   </head>
   <body>
-    <h1 align="center">Mis libros</h1>
+    <nav class="topnav">
+    <a href="./index.html">Home</a> 
+  <a href="./index1.html">Library</a>
+  <a href="./index2.html">Drive</a>
+</nav>
+    <div style="line-height:10px">
+    <a href="./index.html"><img id="reader" src="ereader.png" width = 52px style='float: left;'/></a>
+    <h1><span class="black"><a href="./index.html">kindle</a></span></h1>
+    <h1><a href="./index.html"><span class="grey">Digital</span> <span class="grey-light">Library </span></a></h1>
+    </div>
+        <h2>Directly from the Cloud</h2>
     <br />
     <div align="center">
     <input type="text" id="Consulta" placeholder="Buscar en Drive" title="Busqueda">
@@ -39,10 +51,6 @@
       var CLIENT_ID = '983869916425-495k0u2mf6i377r6c04d1nkleek9qbbj.apps.googleusercontent.com';
       var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
       var SCOPES = 'https://www.googleapis.com/auth/drive';
-      
-      var authorizeButton = document.getElementById('authorize_button');
-      var signoutButton = document.getElementById('signout_button');
-      var disconnectButton = document.getElementById('disconnect_button');
 
       function handleClientLoad() {
         gapi.load('client:auth2', initClient);
@@ -58,24 +66,13 @@
           gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
           // Handle the initial sign-in state.
           updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-          authorizeButton.onclick = handleAuthClick;
-          signoutButton.onclick = handleSignoutClick;
-          disconnectButton.onclick = disconnect;
         });
       }
 
       function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {       
-          authorizeButton.style.display = 'none';
-          signoutButton.style.display = 'block';
-          disconnectButton.style.display = 'block';
           listFiles("","'root' in parents and (mimeType = 'application/vnd.google-apps.folder' or fileExtension = 'azw3' or fileExtension = 'mobi')");
         } 
-        else {
-          authorizeButton.style.display = 'block';
-          signoutButton.style.display = 'none';
-          disconnectButton.style.display = 'none';
-        }
       }
 
       function handleAuthClick(event) {
