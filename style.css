@@ -108,6 +108,10 @@ h1 {
 
 }
 
+h1 a {
+  color: inherit;
+}
+
 .black{
     color: black;
     margin-left: 0%;
@@ -139,7 +143,6 @@ h2 {
 
 a {
   text-decoration: none;
-  color: inherit;
 }
 
 #load_data {
