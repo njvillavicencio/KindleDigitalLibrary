@@ -125,7 +125,12 @@
           }            
         }
         if (bookInfo.mobi!="" || bookInfo.azw3!=""){
-          readMetadata(bookInfo);
+		var delayInMilliseconds = 500; //1 second
+
+	  setTimeout(function() {
+  	    readMetadata(bookInfo);
+	  }, delayInMilliseconds);
+          
         }
       }
       
