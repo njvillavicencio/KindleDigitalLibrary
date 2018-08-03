@@ -61,6 +61,11 @@ table {
   margin-left: 5%;
 }
 
+table a: visited {
+    color: blue;
+}
+
+
 #Navegacion {
   font-size: 24px;
 }
@@ -143,10 +148,6 @@ h2 {
 
 a {
   text-decoration: none;
-}
-
-a:visited { 
-    color: blue;
 }
 
 #load_data {
