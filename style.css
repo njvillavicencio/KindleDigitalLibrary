@@ -145,6 +145,10 @@ a {
   text-decoration: none;
 }
 
+a:visited { 
+    color: blue;
+}
+
 #load_data {
     height:40px;
     width:100px;
