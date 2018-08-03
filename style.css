@@ -41,7 +41,7 @@ input {
   background-size: 30px 30px;
   background-position: 5px 5px;
   background-repeat: no-repeat;
-  width: 90%;
+  width: 85%;
   font-size: 16px;
   padding: 12px 20px 12px 40px;
   border: 1px solid #ddd;
@@ -53,7 +53,7 @@ input {
 
 table {
   border-collapse: collapse;
-  width: 100%;
+  width: 90%;
   border: 1px solid #ddd;
   font-size: 18px;
   font-family: Poppins, sans-serif;
