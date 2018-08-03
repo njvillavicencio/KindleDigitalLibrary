@@ -225,7 +225,7 @@
         var metaData={"title":"","creator":"","date":"","description":"","subject":[],"seriesTitle":"", "seriesIndex": ""};
         gapi.client.drive.files.get ({ 
         'fileId': bookInfo.opf, 
-        'alt': 'media'}
+        'alt': 'media'
         }).then(function(jsonResp) {
           var str3=jsonResp.body;
           var str2=str3.split("\n");
