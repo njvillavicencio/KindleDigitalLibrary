@@ -46,6 +46,7 @@ input {
   padding: 12px 20px 12px 40px;
   border: 1px solid #ddd;
   margin-bottom: 12px;
+  font-family: Poppins, sans-serif;
 }
 
 
@@ -102,10 +103,39 @@ header {
 }
 
 h1 {
-  font-size: 30px;
-  color: #8c6b48;
+  font-size: 60px;
   background-color: white;
-  font-family: Calibri, sans-serif;
+  font-family: Ubuntu, sans-serif;
+
+}
+
+.black{
+    color: black;
+    margin-left: 0%;
+}
+
+.grey{
+
+    color: grey;
+    margin-left: 0%;
+}
+
+.grey-light {
+    color: #D3D3D3;
+    margin-left: 0%;
+}
+
+#reader {
+    color: #D3D3D3;
+    margin-left: 5%;
+}
+
+h2 {
+    color: black;
+    margin-left: 16%;
+  font-family: Ubuntu, sans-serif;
+    margin-top: -1.6%;
+      font-size: 16px;
 }
 
 a {
