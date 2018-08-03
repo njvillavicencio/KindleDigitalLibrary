@@ -9,20 +9,21 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" type="text/css">
   </head>
   <body>
+    <nav class="right2">
+    <a href="./index.html">Home</a> 
+  <a href="./index1.html">Library</a>
+  <a href="./index2.html">Drive</a>
+</nav>
     <div style="line-height:10px">
-    <img id="reader" src="ereader.png" width = 52px style='float: left;'/>
-    <h1><span class="black">kindle</span></h1>
-    <h1><span class="grey">Digital</span> <span class="grey-light">Library </span></h1>
+    <a href="./index.html"><img id="reader" src="ereader.png" width = 52px style='float: left;'/></a>
+    <h1><span class="black"><a href="./index.html">kindle</a></span></h1>
+    <h1><a href="./index.html"><span class="grey">Digital</span> <span class="grey-light">Library </span></a></h1>
     </div>
         <h2>Directly from the Cloud</h2>
     <br/>
     <div align="center">
       <input type="text" id="Consulta" onkeyup="filterTable()" placeholder="Buscar un libro" title="Escribe un titulo o autor">
     </div>
-	  
-    <button class=".GKindle" id="authorize_button" style="display: none;">Conectar Aplicación</button>
-    <button class=".GKindle" id="signout_button" style="display: none;">Salir de Google</button>
-    <button class=".GKindle" id="disconnect_button" style="display: none;">Desconectar Aplicación</button>
 
     <table id="Libros">
       <tr class="header">
@@ -50,10 +51,6 @@
       var CLIENT_ID = '983869916425-495k0u2mf6i377r6c04d1nkleek9qbbj.apps.googleusercontent.com';
       var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
       var SCOPES = 'https://www.googleapis.com/auth/drive';
-      
-      var authorizeButton = document.getElementById('authorize_button');
-      var signoutButton = document.getElementById('signout_button');
-      var disconnectButton = document.getElementById('disconnect_button');
      
       function handleClientLoad() {
         gapi.load('client:auth2', initClient);
@@ -69,24 +66,13 @@
           gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
           // Handle the initial sign-in state.
           updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-          authorizeButton.onclick = handleAuthClick;
-          signoutButton.onclick = handleSignoutClick;
-          disconnectButton.onclick = disconnect;
         });
       }
 
       function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {   
-          authorizeButton.style.display = 'none';
-          signoutButton.style.display = 'block';
-          disconnectButton.style.display = 'block';
           listFiles("","fileExtension = 'opf'");  <!-- si cambia usar name contains '.opf' -->
         } 
-        else {
-          authorizeButton.style.display = 'block';
-          signoutButton.style.display = 'none';
-          disconnectButton.style.display = 'none';
-        }
       }
 
       function handleAuthClick(event) {
@@ -243,10 +229,8 @@
         'method': 'GET',
         'params': {'fileId': bookInfo.opf, 'alt': 'media'},
         'headers': {'Authorization': 'Bearer ' + gapi.auth.getToken().access_token }
-        });
-        request.execute(function(jsonResp,rawResp) {
-          var respObject = JSON.parse(rawResp); // rawResp is encoded JSON string with header, body, etc.
-          var str3 = respObject.gapiRequest.data.body;
+        }).then(function(jsonResp) {
+          var str3=jsonResp.body;
           var str2=str3.split("\n");
             for (i = 0; i < str2.length; i++) { 
               var str=str2[i];
