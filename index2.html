@@ -219,7 +219,7 @@
       input.addEventListener("keyup", function(event) {
         event.preventDefault();
         if (event.keyCode === 13) {
-          var query = "fullText contains '"+input.value+"'"+" and (mimeType = 'application/vnd.google-apps.folder' or fileExtension = 'azw3' or fileExtension = 'mobi')";
+          var query = "fullText contains '"+input.value+"' or name contains '"+input.value+"' and (mimeType = 'application/vnd.google-apps.folder' or fileExtension = 'azw3' or fileExtension = 'mobi')";
           currDirectory="<a href='#' onclick='navigationMenu(this.id,"+"root"+")' id='root'>Mi unidad</a> > Resultados de la búsqueda";
           document.getElementById("folders").innerHTML=currDirectory;
           destroyTable(query);
