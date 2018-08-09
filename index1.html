@@ -116,15 +116,13 @@
           }
           else if (file.fileExtension == "azw3") {
             bookInfo.azw3=file.webContentLink;
+            bookInfo.opf=file.id;
           }
           else if (file.mimeType == "image/jpeg") {
             bookInfo.cover=file.webContentLink;
-          }
-          else if (file.fileExtension == "opf") {
-            bookInfo.opf=file.id;
-          }            
+          }        
         }
-        if (bookInfo.mobi!="" || bookInfo.azw3!=""){
+        if (bookInfo.azw3!=""){
 		var delayInMilliseconds = 500; //1 second
 
 	  setTimeout(function() {
@@ -236,7 +234,7 @@ function readMetadata(bookInfo) {
     var metaData={"title":"","creator":"","date":"","description":"","subject":[],"seriesTitle":"", "seriesIndex": ""};
     var accessToken = gapi.auth.getToken().access_token;
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', "https://www.googleapis.com/drive/v3/files/"+bookInfo.azw3+"?"+"alt=media");
+    xhr.open('GET', "https://www.googleapis.com/drive/v3/files/"+bookInfo.opf+"?"+"alt=media");
     xhr.responseType = "blob";
     xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
     xhr.onload = function() {
