@@ -225,8 +225,100 @@
 	document.getElementById("Consulta").value=clickedElement.innerHTML;
 	filterTable();
       }
-
-      function readMetadata(bookInfo) {
+	    
+      function uintToString(uintArray) {
+        var encodedString = String.fromCharCode.apply(null, uintArray),
+        decodedString = decodeURIComponent(escape(encodedString));
+        return decodedString;
+      }
+	    
+function readMetadata(bookInfo) {
+    var metaData={"title":"","creator":"","date":"","description":"","subject":[],"seriesTitle":"", "seriesIndex": ""};
+    var accessToken = gapi.auth.getToken().access_token;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', "https://www.googleapis.com/drive/v3/files/"+bookInfo.opf+"?"+"alt=media");
+    xhr.responseType = "blob";
+    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+    xhr.onload = function() {
+      var file=xhr.response;
+      var reader = new FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onload = function(event) {
+        var bookBob = reader.result;
+        var view1 = new DataView(reader.result);
+        var recordsNumber=view1.getUint16(76);
+        var firsRecordOffset = view1.getUint32(78);
+        var mobiHeaderIndex = 78+8*recordsNumber+2+16;
+        var isMobi = view1.getUint32(mobiHeaderIndex);
+        var firstImageIndex = view1.getUint32(mobiHeaderIndex+92)
+        if (isMobi == 1297039945) {
+          var bookBinary = new Uint8Array(bookBob);
+          var bookTitleOffset = view1.getUint32(mobiHeaderIndex+68)+firsRecordOffset;
+          var bookTitleLength = view1.getUint32(mobiHeaderIndex+72);
+          var bookTitle = uintToString(bookBinary.slice(bookTitleOffset,bookTitleOffset+bookTitleLength));      
+          metaData.title = bookTitle;
+          var mobiHeaderLength=view1.getUint32(mobiHeaderIndex+4);
+          var hasEXTH = view1.getUint32(mobiHeaderIndex+mobiHeaderLength);
+          if (hasEXTH == 1163416648) {
+            var exthHeaderIndex = mobiHeaderIndex+mobiHeaderLength; // dps vienen 8 bytes donde sale el string EXTH y el largo
+            var recordCount = view1.getUint32(exthHeaderIndex+8); // cantidad de records que contiene
+            var recordIndex = 0; //empieza la información del primer record, los primeros 4 bytes son el recordtype
+            var recordType = 0;
+            var recordLength = 0;
+            for (var i=0; i<recordCount;i++){ 
+              if (i==0) {
+                var recordIndex = exthHeaderIndex+12;
+              }
+              else {
+                recordIndex = recordIndex+recordLength;
+              }
+              var recordType = view1.getUint32(recordIndex);
+              var recordLength = view1.getUint32(recordIndex+4);
+              if (recordType == 100){
+                var author=uintToString(bookBinary.slice(recordIndex+8,recordIndex+recordLength));
+                metaData.creator=author;
+              }
+              else if (recordType == 103){
+                var description=uintToString(bookBinary.slice(recordIndex+8,recordIndex+recordLength));
+                metaData.description=description;
+              }
+              else if (recordType == 105){
+                var subject=uintToString(bookBinary.slice(recordIndex+8,recordIndex+recordLength));
+		if subject.indexOf(";"){
+		   var subjects = subject.split(";");
+		   for (var j=0; j<subjects.length; j++){
+		     metaData["subject"].push(subjects[i]);
+		   }
+		}
+		else {
+		  metaData["subject"].push(subjects[i]);
+		}
+              }
+              else if (recordType == 106){
+                var date=uintToString(bookBinary.slice(recordIndex+8,recordIndex+recordLength));
+                metaData.date = date.substring(0,4);
+              }     
+              else if (recordType == 201){
+                var coverRecordIndex=view1.getUint32(recordIndex+8);
+                var coverOffset = view1.getUint32(78+8*(firstImageIndex+coverRecordIndex));
+                var endOffset = view1.getUint32(78+8*(firstImageIndex+coverRecordIndex+1));              
+                var coverBase64=base64js.fromByteArray(bookBinary.slice(coverOffset,endOffset));
+                <!--var result = document.getElementById('result');-->
+                <!--result.innerHTML = "<img src='data:image/jpeg;base64,"+coverBase64+"'/>";-->
+              }                                        
+            }
+          }
+        }
+      appendRow(bookInfo,metaData);
+      }
+    };
+    xhr.onerror = function() {
+      console.log("caca");
+    };
+    xhr.send();    
+  }
+	    
+      function readMetadata3(bookInfo) {
         var metaData={"title":"","creator":"","date":"","description":"","subject":[],"seriesTitle":"", "seriesIndex": ""};
         gapi.client.drive.files.get ({ 
         'fileId': bookInfo.opf, 
