@@ -37,7 +37,7 @@
 }
 
 input {
-  background-image: url(/search.png);
+  background-image: url(/style/search.png);
   background-size: 30px 30px;
   background-position: 5px 5px;
   background-repeat: no-repeat;
