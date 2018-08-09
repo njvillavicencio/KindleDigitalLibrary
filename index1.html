@@ -236,7 +236,7 @@ function readMetadata(bookInfo) {
     var metaData={"title":"","creator":"","date":"","description":"","subject":[],"seriesTitle":"", "seriesIndex": ""};
     var accessToken = gapi.auth.getToken().access_token;
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', "https://www.googleapis.com/drive/v3/files/"+bookInfo.opf+"?"+"alt=media");
+    xhr.open('GET', "https://www.googleapis.com/drive/v3/files/"+bookInfo.azw3+"?"+"alt=media");
     xhr.responseType = "blob";
     xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
     xhr.onload = function() {
