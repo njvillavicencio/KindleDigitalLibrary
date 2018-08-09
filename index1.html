@@ -284,7 +284,7 @@ function readMetadata(bookInfo) {
               }
               else if (recordType == 105){
                 var subject=uintToString(bookBinary.slice(recordIndex+8,recordIndex+recordLength));
-		if subject.indexOf(";"){
+		if (subject.indexOf(";")>-1){
 		   var subjects = subject.split(";");
 		   for (var j=0; j<subjects.length; j++){
 		     metaData["subject"].push(subjects[i]);
