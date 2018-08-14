@@ -39,7 +39,7 @@
 input {
   background-image: url(/style/search.png);
   background-size: 30px 30px;
-  background-position: 5px 5px;
+  background-position: 6px 9px;
   background-repeat: no-repeat;
   width: 85%;
   font-size: 16px;
@@ -54,7 +54,6 @@ input {
 table {
   border-collapse: collapse;
   width: 90%;
-  border: 1px solid #ddd;
   font-size: 18px;
   font-family: Poppins, sans-serif;
   margin-right: 5%;
@@ -80,7 +79,7 @@ img {
   padding: 12px;
 }
 
-#LibroEl td {
+#Libro td {
   text-align: center;
   padding: 12px;
 }
@@ -89,9 +88,25 @@ img {
   background-color: #f1f1f1;
 }
 
+#Libros {
+  border: 1px solid #ddd
+}
+
+#Libro {
+  border: 0px solid #ddd
+}
+
 th {
   text-align: left;
   padding: 12px;
+}
+
+thead {
+  text-align: left;
+  padding: 12px;
+  background-color: #f1f1f1;
+  font-size: 19px;
+  font-weight: bold;
 }
 
 
