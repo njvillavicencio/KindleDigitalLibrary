@@ -135,9 +135,9 @@
               row.insertCell(4).innerHTML="-";
             }
             else if (file.fileExtension == "mobi" || file.fileExtension == "azw3" ) {
-              row.setAttribute("onclick","download('"+file.webContentLink+"')");
+              
               cell0.innerHTML="<img width='37' heigth='37' src='./style/book.png'/>";
-              cell1.innerHTML=file.name;
+              cell1.innerHTML="<a href='"+file.webContentLink+"'>"+file.name+"</a>";
               if (file.size/1000000 > 1){
                 row.insertCell(4).innerHTML=file.size/1000000 + " MB";
               }
