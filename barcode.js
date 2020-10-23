@@ -36,25 +36,7 @@ $(document).ready(function(){
             Quagga.onDetected(function(result) {
                 var last_code = result.codeResult.code;
                   Quagga.stop();
-                  $.ajax({
-                    type: "POST",
-                    url: '/get_barcode',
-                    data: { upc: last_code },
-                    success: function(data){
-                        if(1 == 1){
-                            document.getElementById("codigo_barra").value = data.codigo_barra;
-                            document.getElementById("codigo_barra").disabled = true;
-                        }
-
-                        else{
-                            alert('No se han obtenidos resultados, vuelva a ingresar los campos');
-                           
-                            // Stop loading
-                            //l.ladda( 'stop' );
-                          }
-                        }
-
-                  });
+                  console.log(last_code)
                   document.getElementById('barcode-scanner').style.display = 'none';
                   document.getElementById('form_sku').style.display = 'block';
                   document.getElementById('cerrar').style.display = 'none';
