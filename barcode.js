@@ -34,7 +34,14 @@ $(document).ready(function(){
             Quagga.onDetected(function(result) {
                 var last_code = result.codeResult.code;
                   Quagga.stop();
-                  var dataBase=readCells('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A:E');
+                  var data=readCells('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A:E').values;
+                  var dataBase={};               
+                  for (var i = 0; i < data.length; i++) {
+                      var id = data[i][0];
+                      var description = data[i][1];    
+                      dataBase[id].push[description];
+                  }
+                  console.log(dataBase);
                   document.getElementById('barcode-scanner').style.display = 'none';
                   document.getElementById('form_sku').style.display = 'block';
                   document.getElementById('scan_button').style.display = 'block';
