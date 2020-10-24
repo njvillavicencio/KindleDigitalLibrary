@@ -68,11 +68,8 @@
         range: range};
 	   
 	var request = gapi.client.sheets.spreadsheets.values.get(params);
-      request.then(function(response) {
-	return response.result.values;
-      }, function(reason) {
-        console.error('error: ' + reason.result.error.message);
-      });	      
+	   return request;
+      
    }
 	    
    function writeCells(fileId, range, information) {
