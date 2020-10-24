@@ -63,9 +63,7 @@
         });
       }
    function readDataBase(fileId, range) {
-	var params = {
-        spreadsheetId: fileId,
-        range: range};	   
+	var params = {spreadsheetId: fileId,  range: range};	   
 	var request = gapi.client.sheets.spreadsheets.values.get(params);  	   
 	request.then(function(response) {
         	data= response.result.values;            
@@ -74,6 +72,7 @@
 			var description = data[i][1];
 			if (!(id in DATABASE)){ 
 				DATABASE[id]=description
+			}
                   }
 		console.log(DATABASE);
          }, function(reason) {
