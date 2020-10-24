@@ -86,7 +86,9 @@
                 document.getElementById("codigo_barra").value = code;
                 document.getElementById("codigo_barra").disabled = true;
 		document.getElementById("descripcion").value = description;
-                //document.getElementById("descripcion").disabled = true;
+		if (description.length>0){
+                	document.getElementById("descripcion").disabled = true;
+		}
          }, function(reason) {
              console.error('error: ' + reason.result.error.message);
          });	
