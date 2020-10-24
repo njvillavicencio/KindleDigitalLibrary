@@ -82,8 +82,8 @@
 
    function readCells(code) {
 		var description="";
-		if (id in DATABASE){ 
-                	description = DATABASE[id];		
+		if (code in DATABASE){ 
+                	description = DATABASE[code];		
 		}
                 document.getElementById('barcode-scanner').style.display = 'none';
                 document.getElementById('form_sku').style.display = 'block';
