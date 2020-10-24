@@ -41,7 +41,8 @@
       var signoutButton = document.getElementById('signout_button');
       var disconnectButton = document.getElementById('disconnect_button');
       var scanButton= document.getElementById('scan_button');
-      var saveButton = document.getElementById('save_button');
+      var saveButton = document.getElementById('save_button'); 
+      saveButton.disabled="true";
       document.getElementById('descripcion').addEventListener("change", verify)
       var initialized=false;
 
@@ -80,11 +81,10 @@
          });	    
    }	      
     function verify(){
-	console.log(this.value);
         if(this.value.length > 0) { 
-            document.getElementById('save_button').disabled = false; 
+            saveButton.disabled = false; 
         } else { 
-            document.getElementById('save_button').disabled = true;
+            saveButton.disabled = true;
         }
     }
    function readCells(code) {
