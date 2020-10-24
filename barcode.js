@@ -19,6 +19,12 @@ $(document).ready(function(){
         document.getElementById('scan_button').style.display = 'block';
         document.getElementById('cerrar').style.display = 'none';
       }); 
+   
+      $("body").on('click',"#save_button", function(){
+       var codigo=document.getElementById("codigo_barra").value;
+       var nombre = document.getElementById("descripcion").value;
+       writeCells('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A1:E1',[codigo,nombre,2,0,0]);
+      });  
     
 
 });
