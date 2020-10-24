@@ -6,12 +6,7 @@ $(document).ready(function(){
     $("body").on('click',"#scan_button", function(){
         // $('#form_persona').show();
         // document.getElementById('form_persona').style.display = 'block';
-
-        document.getElementById('barcode-scanner').style.display = 'block';
-        document.getElementById('scan_button').style.display = 'none';
-        document.getElementById('cerrar').style.display = 'block';
-        document.getElementById('form_sku').style.display = 'none';
-        getEscaner();
+        escanear()
       });  
 
       $("body").on('click',"#cerrar", function(){
@@ -26,11 +21,21 @@ $(document).ready(function(){
        var nombre = document.getElementById("descripcion").value;
        writeCells(codigo,nombre);       
        writeDataBase('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A1:E1',[codigo,nombre,2,0,0]);
+       escanear();
       });  
     
 
 });
 
+function escanear(){
+        document.getElementById('barcode-scanner').style.display = 'block';
+        document.getElementById('scan_button').style.display = 'none';
+        document.getElementById('cerrar').style.display = 'block';
+        document.getElementById('form_sku').style.display = 'none';
+        getEscaner();
+    
+    
+}
 
           function getEscaner($btn){
             Quagga.onDetected(function(result) {
