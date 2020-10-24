@@ -6,6 +6,7 @@ $(document).ready(function(){
     $("body").on('click',"#scan_button", function(){
         // $('#form_persona').show();
         // document.getElementById('form_persona').style.display = 'block';
+        readDataBase('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A:E');
         document.getElementById('barcode-scanner').style.display = 'block';
         document.getElementById('scan_button').style.display = 'none';
         document.getElementById('cerrar').style.display = 'block';
@@ -23,7 +24,8 @@ $(document).ready(function(){
       $("body").on('click',"#save_button", function(){
        var codigo=document.getElementById("codigo_barra").value;
        var nombre = document.getElementById("descripcion").value;
-       writeCells('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A1:E1',[codigo,nombre,2,0,0]);
+       writeCells(codigo,nombre);       
+       writeDataBase('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A1:E1',[codigo,nombre,2,0,0]);
       });  
     
 
@@ -34,7 +36,7 @@ $(document).ready(function(){
             Quagga.onDetected(function(result) {
                 var last_code = result.codeResult.code;
                 Quagga.stop();
-                readCells('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A:E', last_code);
+                readCells(last_code);
                 }
                 );
     
