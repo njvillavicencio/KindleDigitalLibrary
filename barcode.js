@@ -19,8 +19,9 @@ $(document).ready(function(){
       $("body").on('click',"#save_button", function(){
        var codigo=document.getElementById("codigo_barra").value;
        var nombre = document.getElementById("descripcion").value;
+       var cantidad = document.getElementById("cantidad").value;
        writeCells(codigo,nombre);       
-       writeDataBase('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A1:E1',[codigo,nombre,2,0,0]);
+       writeDataBase('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A1:E1',[codigo,nombre,cantidad,0,0]);
        escanear();
       });  
     
