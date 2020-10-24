@@ -120,7 +120,8 @@
 
       function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {         
-          authorizeButton.style.display = 'none';
+	  readDataBase('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A:E');
+	  authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
           disconnectButton.style.display = 'block';
           scanButton.style.display = 'block';
