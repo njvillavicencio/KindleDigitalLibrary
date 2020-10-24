@@ -42,7 +42,7 @@
       var disconnectButton = document.getElementById('disconnect_button');
       var scanButton= document.getElementById('scan_button');
       var saveButton = document.getElementById('save_button');
-      saveButton.addEventListener("change", verify)
+      document.getElementById('descripcion').addEventListener("change", verify)
       var initialized=false;
 
       function handleClientLoad() {
@@ -75,7 +75,6 @@
 				DATABASE[id]=description
 			}
                   }
-		console.log(DATABASE);
          }, function(reason) {
              console.error('error: ' + reason.result.error.message);
          });	    
@@ -118,7 +117,6 @@
       var valueRangeBody = {'values': [information],'majorDimension':'ROWS'};
       var request = gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody);
       request.then(function(response) {
-        console.log(response.result);
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       });
