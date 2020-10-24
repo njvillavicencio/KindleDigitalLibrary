@@ -70,6 +70,7 @@
 	var request = gapi.client.sheets.spreadsheets.values.get(params);
       request.then(function(response) {
         console.log(response.result);
+	return response.result.values;
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       });	      
