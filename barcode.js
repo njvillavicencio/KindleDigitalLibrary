@@ -34,7 +34,8 @@ $(document).ready(function(){
             Quagga.onDetected(function(result) {
                 var last_code = result.codeResult.code;
                   Quagga.stop();
-                  var data=readCells('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A:E').values;
+                  var data=readCells('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A:E');
+                  data=data.values;
                   var dataBase={};               
                   for (var i = 0; i < data.length; i++) {
                       var id = data[i][0];
