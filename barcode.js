@@ -21,11 +21,9 @@ $(document).ready(function(){
       }); 
     
       $("form_sku").on('click',"#save_button", function(){
-          console.log(1);
        var codigo=document.getElementById("codigo_barra").value;
        var nombre = document.getElementById("descripcion").value;
-          console.log(codigo);
-      // writeCells('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A1:E1',[codigo,nombre,2,0,0]);
+       writeCells('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A1:E1',[codigo,nombre,2,0,0]);
       }); 
 });
 
