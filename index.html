@@ -16,13 +16,12 @@
     <button id="authorize_button" style="display: none;">Conectar Aplicación</button>
     <button id="signout_button" style="display: none;">Salir de Google</button>
     <button id="disconnect_button" style="display: none;">Desconectar Aplicación</button>
-    <button id="escanear">Escanear</button>
+    <button id="scan_button" style="display: none;">Escanear</button>
     <button id="cerrar" style="display:none;">Cerrar</button>
 
     <form style="display: none" id="form_sku">
             <label for="Nombres">Código de Barra</label>
             <input type="text" id='codigo_barra' placeholder="">
-
             <label for="circunscripcion">Descripción del producto</label>
             <input type="text" id='descripcion' placeholder="">
             <label for="local">Cantidad</label>
@@ -40,6 +39,7 @@
       var authorizeButton = document.getElementById('authorize_button');
       var signoutButton = document.getElementById('signout_button');
       var disconnectButton = document.getElementById('disconnect_button');
+      var scanButton= document.getElementById('scan_button');
       var initialized=false;
 
       function handleClientLoad() {
@@ -96,11 +96,13 @@
           authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
           disconnectButton.style.display = 'block';
+          scanButton.style.display = 'block';
         } 
         else {
           authorizeButton.style.display = 'block';
           signoutButton.style.display = 'none';
           disconnectButton.style.display = 'none';
+          scanButton.style.display = 'none';
         }
       }
 
