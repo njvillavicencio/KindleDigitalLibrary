@@ -49,21 +49,54 @@ function escanear(){
                 }
                 );
     
-            Quagga.init({
+          Quagga.init({
                 inputStream : {
                   name : "Live",
                   type : "LiveStream",
                   numOfWorkers: navigator.hardwareConcurrency,
-                  target: document.querySelector('#barcode-scanner')  
+
+                  constraints: {
+                    width: 640,
+                    height: 480,
+                    facingMode: "environment",
+                  },
+                  
+                  area: { // defines rectangle of the detection/localization area
+                    top: "33%",    // top offset
+                    right: "33%",  // right offset
+                    left: "33%",   // left offset
+                    bottom: "33%"  // bottom offset
+                  },
+
+
+
+                  target: document.querySelector('#barcode-scanner')
+
+                  
                 },
+                // locator: {
+                //   patchSize: "x-large",
+                //   halfSample: true
+                // },
                 decoder: {
-                    readers : ['ean_reader','ean_8_reader','code_39_reader','code_39_vin_reader','codabar_reader','upc_reader','upc_e_reader']
-                }
+                  readers: [
+                    'code_128_reader'
+                  ],
+                  debug: {
+                      drawBoundingBox: true,
+                      showFrequency: true,
+                      drawScanline: true,
+                      showPattern: true
+                  },
+                  multiple: false
+                },
+                locate: false
               },function(err) {
                   if (err) { console.log(err); return }
                   Quagga.initialized = true;
                   Quagga.start();
               });
+
             
 
           }
