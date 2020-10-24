@@ -20,6 +20,7 @@ $(document).ready(function(){
        var codigo=document.getElementById("codigo_barra").value;
        var nombre = document.getElementById("descripcion").value;
        var cantidad = document.getElementById("cantidad").value;
+       console.log(cantidad);
        writeCells(codigo,nombre);       
        writeDataBase('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A1:E1',[codigo,nombre,cantidad,0,0]);
        escanear();
