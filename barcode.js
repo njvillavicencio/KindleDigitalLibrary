@@ -3,11 +3,11 @@
 $(document).ready(function(){
 
 
-    $("body").on('click',"#escanear", function(){
+    $("body").on('click',"#scan_button", function(){
         // $('#form_persona').show();
         // document.getElementById('form_persona').style.display = 'block';
         document.getElementById('barcode-scanner').style.display = 'block';
-        document.getElementById('escanear').style.display = 'none';
+        document.getElementById('scan_button').style.display = 'none';
         document.getElementById('cerrar').style.display = 'block';
         document.getElementById('form_sku').style.display = 'none';
         getEscaner();
@@ -16,7 +16,7 @@ $(document).ready(function(){
       $("body").on('click',"#cerrar", function(){
         Quagga.stop();
         document.getElementById('barcode-scanner').style.display = 'none';
-        document.getElementById('escanear').style.display = 'block';
+        document.getElementById('scan_button').style.display = 'block';
         document.getElementById('cerrar').style.display = 'none';
       }); 
 
@@ -42,7 +42,7 @@ $(document).ready(function(){
                   document.getElementById('barcode-scanner').style.display = 'none';
                   document.getElementById('form_sku').style.display = 'block';
                   document.getElementById('cerrar').style.display = 'none';
-                  document.getElementById('escanear').style.display = 'block';
+                  document.getElementById('scan_button').style.display = 'block';
                 }
                 
                 );
