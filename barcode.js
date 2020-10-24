@@ -54,43 +54,11 @@ function escanear(){
                   name : "Live",
                   type : "LiveStream",
                   numOfWorkers: navigator.hardwareConcurrency,
-
-                  constraints: {
-                    width: 640,
-                    height: 480,
-                    facingMode: "environment",
-                  },
-                  
-                  area: { // defines rectangle of the detection/localization area
-                    top: "33%",    // top offset
-                    right: "33%",  // right offset
-                    left: "33%",   // left offset
-                    bottom: "33%"  // bottom offset
-                  },
-
-
-
-                  target: document.querySelector('#barcode-scanner')
-
-                  
+                  target: document.querySelector('#barcode-scanner')  
                 },
-                // locator: {
-                //   patchSize: "x-large",
-                //   halfSample: true
-                // },
                 decoder: {
-                  readers: [
-                    'code_128_reader'
-                  ],
-                  debug: {
-                      drawBoundingBox: true,
-                      showFrequency: true,
-                      drawScanline: true,
-                      showPattern: true
-                  },
-                  multiple: false
-                },
-                locate: false
+                    readers : ['ean_reader']
+                }
               },function(err) {
                   if (err) { console.log(err); return }
                   Quagga.initialized = true;
