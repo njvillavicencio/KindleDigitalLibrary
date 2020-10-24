@@ -62,7 +62,7 @@
         });
       }
 
-   function readCells(fileId, range) {
+   function readCells(fileId, range, code) {
 	var params = {
         spreadsheetId: fileId,
         range: range};
@@ -70,20 +70,22 @@
 	var request = gapi.client.sheets.spreadsheets.values.get(params);  	   
 	request.then(function(response) {
         	data= response.result.values;
-		console.log(data);
-                var dataBase={};               
+                //var dataBase=[];               
                 for (var i = 0; i < data.length; i++) {
                 	var id = data[i][0];
-                        var description = data[i][1];    
-                        dataBase[id].push[description];
+			var description="";
+			if (id=code){ 
+                        	description = data[i][1];
+			}
+                        //dataBase.push({key: code, value: description});
                   }
-                console.log(dataBase);
+                //console.log(dataBase);
                 document.getElementById('barcode-scanner').style.display = 'none';
                 document.getElementById('form_sku').style.display = 'block';
                 document.getElementById('scan_button').style.display = 'block';
-                document.getElementById("codigo_barra").value = last_code;
+                document.getElementById("codigo_barra").value = code;
                 document.getElementById("codigo_barra").disabled = true;
-		//document.getElementById("descripcion").value = dataBase[last_code];
+		document.getElementById("descripcion").value = description;
                 //document.getElementById("descripcion").disabled = true;
          }, function(reason) {
              console.error('error: ' + reason.result.error.message);
