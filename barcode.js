@@ -19,16 +19,13 @@ $(document).ready(function(){
         document.getElementById('scan_button').style.display = 'block';
         document.getElementById('cerrar').style.display = 'none';
       }); 
+    
+      $("body").on('click',"#save_button", function(){
+       writeCells('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A1:E1',[last_code,2,3,0,0]);
+      }); 
 
 
 });
-
-      
-
-
-
-
-
 
           function getEscaner($btn){
 
@@ -38,16 +35,13 @@ $(document).ready(function(){
                   Quagga.stop();
                   console.log(last_code)
                   var dataBase=readCells('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A:E');
-                  writeCells('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A1:E1',[last_code,2,3,0,0]);
                   document.getElementById('barcode-scanner').style.display = 'none';
                   document.getElementById('form_sku').style.display = 'block';
                   document.getElementById('cerrar').style.display = 'none';
                   document.getElementById('scan_button').style.display = 'block';
+                  document.getElementById('save_button').style.display = 'block';
                 }
-                
                 );
-     
-    
     
             Quagga.init({
                 inputStream : {
