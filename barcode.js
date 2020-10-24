@@ -20,7 +20,7 @@ $(document).ready(function(){
         document.getElementById('cerrar').style.display = 'none';
       }); 
     
-      $("body").on('click',"#save_button", function(){
+      $("form_sku").on('click',"#save_button", function(){
           console.log(1);
        var codigo=document.getElementById("codigo_barra").value;
        var nombre = document.getElementById("descripcion").value;
