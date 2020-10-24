@@ -32,6 +32,7 @@
     <pre id="content"></pre>
 
       <script type="text/javascript">
+      var DATABASE = {};
       var CLIENT_ID = '983869916425-495k0u2mf6i377r6c04d1nkleek9qbbj.apps.googleusercontent.com';
       var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
       var SCOPES = 'https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.appdata';
@@ -61,25 +62,30 @@
           disconnectButton.onclick = disconnect;
         });
       }
-
-   function readCells(fileId, range, code) {
+   function readDataBase(fileId, range) {
 	var params = {
         spreadsheetId: fileId,
-        range: range};
-	   
+        range: range};	   
 	var request = gapi.client.sheets.spreadsheets.values.get(params);  	   
 	request.then(function(response) {
-        	data= response.result.values;
-                //var dataBase=[];               
+        	data= response.result.values;            
                 for (var i = 0; i < data.length; i++) {
                 	var id = data[i][0];
-			var description="";
-			if (id=code){ 
-                        	description = data[i][1];
-			}
-                        //dataBase.push({key: code, value: description});
+			var description = data[i][1];
+			if (!(id in DATABASE)){ 
+				DATABASE[id]=description
                   }
-                //console.log(dataBase);
+		console.log(DATABASE);
+         }, function(reason) {
+             console.error('error: ' + reason.result.error.message);
+         });	    
+   }	      
+
+   function readCells(code) {
+		var description="";
+		if (id in DATABASE){ 
+                	description = DATABASE[id];		
+		}
                 document.getElementById('barcode-scanner').style.display = 'none';
                 document.getElementById('form_sku').style.display = 'block';
                 document.getElementById('scan_button').style.display = 'block';
@@ -87,15 +93,16 @@
                 document.getElementById("codigo_barra").disabled = true;
 		document.getElementById("descripcion").value = description;
 		if (description.length>0){
-                	document.getElementById("descripcion").disabled = true;
-		}
-         }, function(reason) {
-             console.error('error: ' + reason.result.error.message);
-         });	
-      
+                document.getElementById("descripcion").disabled = true;   
+   }
+		
+   function writeCells(code, name) {
+		if (!(code in DATABASE)){ 
+                	DATABASE[code]=name;		
+		}  
    }
 	    
-   function writeCells(fileId, range, information) {
+   function writeDataBase(fileId, range, information) {
       var params = {
         spreadsheetId: fileId,
         range: range,
