@@ -33,27 +33,8 @@ $(document).ready(function(){
           function getEscaner($btn){
             Quagga.onDetected(function(result) {
                 var last_code = result.codeResult.code;
-                  Quagga.stop();
-                  var data={};
-                  var request=readCells('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A:E');
-                  request.then(function(response) {
-                    data= response.result.values;
-                    }, function(reason) {
-                        console.error('error: ' + reason.result.error.message);
-                  });	
-                console.log(data);
-                  var dataBase={};               
-                  for (var i = 0; i < data.length; i++) {
-                      var id = data[i][0];
-                      var description = data[i][1];    
-                      dataBase[id].push[description];
-                  }
-                  console.log(dataBase);
-                  document.getElementById('barcode-scanner').style.display = 'none';
-                  document.getElementById('form_sku').style.display = 'block';
-                  document.getElementById('scan_button').style.display = 'block';
-                  document.getElementById("codigo_barra").value = last_code;
-                  document.getElementById("codigo_barra").disabled = true;
+                Quagga.stop();
+                readCells('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A:E');
                 }
                 );
     
