@@ -23,7 +23,7 @@
             <label for="Nombres">Código de Barra</label>
             <input type="text" id='codigo_barra' placeholder="">
             <label for="circunscripcion">Descripción del producto</label>
-            <input type="text" id='descripcion' onkeyup="verify()" placeholder="">
+            <input type="text" id='descripcion' placeholder="">
             <label for="local">Cantidad</label>
             <input type="number" id='cantidad' placeholder="">
     <button id="save_button" type="button">Guardar</button>
@@ -42,6 +42,7 @@
       var disconnectButton = document.getElementById('disconnect_button');
       var scanButton= document.getElementById('scan_button');
       var saveButton = document.getElementById('save_button');
+      saveButton..addEventListener("change", verify)
       var initialized=false;
 
       function handleClientLoad() {
