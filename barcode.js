@@ -6,7 +6,7 @@ $(document).ready(function(){
     $("body").on('click',"#scan_button", function(){
         // $('#form_persona').show();
         // document.getElementById('form_persona').style.display = 'block';
-        escanear()
+        escanear();
       });  
 
       $("body").on('click',"#cerrar", function(){
