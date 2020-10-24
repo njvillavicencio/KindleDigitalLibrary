@@ -6,7 +6,7 @@ $(document).ready(function(){
     $("body").on('click',"#scan_button", function(){
         // $('#form_persona').show();
         // document.getElementById('form_persona').style.display = 'block';
-        readDataBase('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A:E');
+
         document.getElementById('barcode-scanner').style.display = 'block';
         document.getElementById('scan_button').style.display = 'none';
         document.getElementById('cerrar').style.display = 'block';
