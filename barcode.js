@@ -57,7 +57,7 @@ function escanear(){
                   target: document.querySelector('#barcode-scanner')  
                 },
                 decoder: {
-                    readers : ['ean_reader']
+                    readers : ['ean_13_reader']
                 }
               },function(err) {
                   if (err) { console.log(err); return }
