@@ -67,7 +67,7 @@
    function readDataBase(fileId, range) {
 	var params = {spreadsheetId: fileId,  range: range};	   
 	   
-	  var sheet_metadata = gapi.client.sheets.spreadsheets.get({spreadsheetId: fileId});
+	  var sheet_metadata = gapi.client.sheets.spreadsheets.batchUpdate({spreadsheetId: fileId});
 	   console.log(sheet_metadata);
 	var request = gapi.client.sheets.spreadsheets.values.get(params);  	   
 	request.then(function(response) {
