@@ -67,13 +67,12 @@
    function readDataBase(fileId, range) {
 	var params = {spreadsheetId: fileId,  range: range};	   
 	   
-	  var request2 = gapi.client.sheets.spreadsheets.batchUpdate({spreadsheetId: fileId});
-      request2.then(function(response) {
-        // TODO: Change code below to process the `response` object:
-        console.log(response.result);
-      }, function(reason) {
-        console.error('error: ' + reason.result.error.message);
-      });
+	var request2 = gapi.client.sheets.spreadsheets.get({spreadsheetId: fileId});
+        request2.then(function(response) {
+        	console.log(response.result);
+      	}, function(reason) {
+       		console.error('error: ' + reason.result.error.message);
+      	});
 	var request = gapi.client.sheets.spreadsheets.values.get(params);  	   
 	request.then(function(response) {
         	data= response.result.values;            
