@@ -88,7 +88,7 @@
 	   readExcel(fileId);
 	request.then(function(response) {
         	data= response.result.values;  
-		if (!(data === null)) {
+		if (!(data === undefined)) {
 			for (var i = 0; i < data.length; i++) {
 				var id = data[i][0];
 				var description = data[i][1];
