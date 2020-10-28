@@ -76,12 +76,24 @@
 			}
 		}
 		if (findSheet=-1) {
-			console.log("create sheet");	
+			createSheer(fileId);	
 		}
 
       	}, function(reason) {
        		console.error('error: ' + reason.result.error.message);
       	}); }
+	      
+	      
+    function createSheet(fileID) {
+      var spreadsheetBody = {"sheets": [{"properties": {"sheetId": 0,"title": "prueba"}}]}
+
+      var request = gapi.client.sheets.spreadsheets.create({}, spreadsheetBody);
+      request.then(function(response) {
+        console.log(response.result);
+      }, function(reason) {
+        console.error('error: ' + reason.result.error.message);
+      });
+    }
    function readDataBase(fileId, range) {
 	var params = {spreadsheetId: fileId,  range: range};	   
 	var request = gapi.client.sheets.spreadsheets.values.get(params);  
