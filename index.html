@@ -88,14 +88,15 @@
 	   readExcel(fileId);
 	request.then(function(response) {
         	data= response.result.values;  
-		console.log(data);
-                for (var i = 0; i < data.length; i++) {
-                	var id = data[i][0];
-			var description = data[i][1];
-			if (!(id in DATABASE)){ 
-				DATABASE[id]=description
+		if (!(data === null) {
+			for (var i = 0; i < data.length; i++) {
+				var id = data[i][0];
+				var description = data[i][1];
+				if (!(id in DATABASE)){ 
+					DATABASE[id]=description
+				}
 			}
-                  }
+         	}
          }, function(reason) {
              console.error('error: ' + reason.result.error.message);
          });	    
