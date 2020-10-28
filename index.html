@@ -76,7 +76,7 @@
 			}
 		}
 		if (findSheet=-1) {
-			createSheet(fileId);	
+			makeApiCall(fileId);	
 		}
 
       	}, function(reason) {
@@ -84,7 +84,24 @@
       	}); }
 	      
 	      
-    function createSheet(fileID) {
+    function makeApiCall(fileId) {
+      var params = {
+        spreadsheetId: fileId,
+      };
+
+      var batchUpdateSpreadsheetRequestBody = {
+        requests: [{"addSheet": {"properties": {"sheetId": 0,"title": "prueba2"}}}], 
+      };
+
+      var request = gapi.client.sheets.spreadsheets.batchUpdate(params, batchUpdateSpreadsheetRequestBody);
+      request.then(function(response) {
+        console.log(response.result);
+      }, function(reason) {
+        console.error('error: ' + reason.result.error.message);
+      });
+    }   
+	      
+    function createSheet() {
       var spreadsheetBody = {"sheets": [{"properties": {"sheetId": 0,"title": "prueba"}}]}
 
       var request = gapi.client.sheets.spreadsheets.create({}, spreadsheetBody);
