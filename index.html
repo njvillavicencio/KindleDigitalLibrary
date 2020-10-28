@@ -68,11 +68,10 @@
  	var request = gapi.client.sheets.spreadsheets.get({spreadsheetId: fileId});
         request.then(function(response) {
 		data= response.result.sheets;
-		console.log(data);
 		for (var i=0; i < data.length; i++)
 		{
 			//if (data[i][0]){
-				console.log(data[i]);
+				console.log(data[i].properties.sheetId);
 			//}
 		}
 
