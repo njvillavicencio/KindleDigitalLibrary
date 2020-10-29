@@ -71,6 +71,7 @@
           spaces: 'appDataFolder',
           fields: 'files(id,name)'
         }).then(function(response) {
+		console.log(files);
           var files = response.result.files;
           if (files && files.length > 0) {
               var file = files[0];
