@@ -76,9 +76,9 @@
               var file = files[0];
               readExcel(file.name);
           }    
-         else {
-		createAppDataFile();
-	 }
+        // else {
+		//createAppDataFile();
+	 //}
       });
       }
       
@@ -102,7 +102,8 @@
 		{
 			if (data[i].properties.sheetId==0){			
 				findSheet=0;
-				sheetName=data[i].properties.name;
+				console.log(data[i]);
+				sheetName=data[i].properties.sheetId;
 			}
 		}
 		if (findSheet==-1) {
