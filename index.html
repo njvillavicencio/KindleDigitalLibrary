@@ -86,8 +86,8 @@
             parents: ['appDataFolder']
           },
           fields: 'id'
-        }).then(function (data) {});
-        console.log(data);
+        }).then(function (data) {console.log(data);});
+        
       };
    function readExcel(fileId) {
  	var request = gapi.client.sheets.spreadsheets.get({spreadsheetId: fileId});
