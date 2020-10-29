@@ -71,10 +71,9 @@
 		var findSheet=-1;
 		for (var i=0; i < data.length; i++)
 		{
-			console.log(data[i].properties.sheetId+1);
-			if (data[i].properties.sheetId=0){
+			if (data[i].properties.sheetId='0'){
 				
-				findSheet=data[i].properties.sheetId;
+				findSheet=0;
 			}
 		}
 		if (findSheet=-1) {
