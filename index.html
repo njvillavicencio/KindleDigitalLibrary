@@ -74,7 +74,7 @@
           var files = response.result.files;
           if (files && files.length > 0) {
               var file = files[0];
-              console.log(file.name);
+              readExcel(file.name);
           }    
          else {
 		createAppDataFile();
@@ -96,13 +96,13 @@
  	var request = gapi.client.sheets.spreadsheets.get({spreadsheetId: fileId});
         request.then(function(response) {
 		data= response.result.sheets;
+		console.log(data);
 		var findSheet=-1;
 		var sheetName = "";
 		for (var i=0; i < data.length; i++)
 		{
 			if (data[i].properties.sheetId==0){			
 				findSheet=0;
-				console.log(data[i]);
 				sheetName=data[i].properties.title;
 			}
 		}
