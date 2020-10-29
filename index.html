@@ -74,9 +74,12 @@
           var files = response.result.files;
           if (files && files.length > 0) {
               var file = files[0];
-              console.log(file);
+              console.log(file.id);
           }    
-        });
+        }, function(reason) {
+        	console.error('error: ' + reason.result.error.message);
+		createAppDataFile();
+      });
       }
       
       function createAppDataFile() {
@@ -86,7 +89,7 @@
             parents: ['appDataFolder']
           },
           fields: 'id'
-        }).then(function (data) {console.log(data);});
+        }).then(function (data) {});
         
       };
    function readExcel(fileId) {
@@ -201,7 +204,6 @@
 
       function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {   
-	  createAppDataFile();
 	  getAppDataFile();
 	  readDataBase('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A:E');
 	  authorizeButton.style.display = 'none';
