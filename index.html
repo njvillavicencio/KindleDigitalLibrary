@@ -66,7 +66,7 @@
       }
 	      
 
-      function getAppDataFile() {
+      function getAppDataFile(notTrue) {
         gapi.client.drive.files.list({
           spaces: 'appDataFolder',
           fields: 'files(id,name)'
@@ -74,7 +74,7 @@
           var files = response.result.files;
           if (files && files.length > 0) {
               var file = files[0];
-              readExcel(file.name);
+              console.log(file.name);
           }    
          else {
 		createAppDataFile();
