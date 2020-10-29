@@ -69,13 +69,14 @@
         request.then(function(response) {
 		data= response.result.sheets;
 		var findSheet=-1;
-		console.log(data);
 		for (var i=0; i < data.length; i++)
 		{
+			console.log(data[i].properties.sheetId=0);
 			if (data[i].properties.sheetId=0){
 				
 				findSheet=0;
 			}
+			console.log(findSheet);
 		}
 		if (findSheet=-1) {
 			makeApiCall(fileId);	
