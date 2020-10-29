@@ -64,6 +64,31 @@
           disconnectButton.onclick = disconnect;
         });
       }
+	      
+
+      function getAppDataFile() {
+        gapi.client.drive.files.list({
+          spaces: 'appDataFolder',
+          fields: 'files(id,name)'
+        }).then(function(response) {
+          var files = response.result.files;
+          if (files && files.length > 0) {
+              var file = files[0];
+              console.log(file);
+          }    
+        });
+      }
+      
+      function createAppDataFile() {
+        gapi.client.drive.files.create({
+          resource: {
+            name: '1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY',
+            parents: ['appDataFolder']
+          },
+          fields: 'id'
+        }).then(function (data) {});
+        console.log(data);
+      };
    function readExcel(fileId) {
  	var request = gapi.client.sheets.spreadsheets.get({spreadsheetId: fileId});
         request.then(function(response) {
@@ -76,7 +101,7 @@
 			}
 		}
 		if (findSheet==-1) {
-			makeApiCall(fileId);	
+			createHoja(fileId);	
 		}
 
       	}, function(reason) {
@@ -84,7 +109,7 @@
       	}); }
 	      
 	      
-    function makeApiCall(fileId) {
+    function createHoja(fileId) {
       var params = {
         spreadsheetId: fileId,
       };
@@ -175,7 +200,9 @@
 
 
       function updateSigninStatus(isSignedIn) {
-        if (isSignedIn) {         
+        if (isSignedIn) {   
+	  createAppDataFile();
+	  getAppDataFile();
 	  readDataBase('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A:E');
 	  authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
