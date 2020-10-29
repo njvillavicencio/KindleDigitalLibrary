@@ -71,13 +71,11 @@
 		var findSheet=-1;
 		for (var i=0; i < data.length; i++)
 		{
-			if (data[i].properties.sheetId.toString(2)='0'){
-				
+			if (data[i].properties.sheetId==0){			
 				findSheet=0;
 			}
-			console.log(findSheet);
 		}
-		if (findSheet=-1) {
+		if (findSheet==-1) {
 			makeApiCall(fileId);	
 		}
 
