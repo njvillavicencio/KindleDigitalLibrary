@@ -71,15 +71,14 @@
           spaces: 'appDataFolder',
           fields: 'files(id,name)'
         }).then(function(response) {
-		console.log(files);
           var files = response.result.files;
           if (files && files.length > 0) {
               var file = files[0];
               console.log(file.id);
           }    
-        }, function(reason) {
-        	console.error('error: ' + reason.result.error.message);
+         else if (files === undefined) {
 		createAppDataFile();
+	 }
       });
       }
       
@@ -90,7 +89,7 @@
             parents: ['appDataFolder']
           },
           fields: 'id'
-        }).then(function (data) {});
+        }).then(function (data) {getAppDataFile();});
         
       };
    function readExcel(fileId) {
