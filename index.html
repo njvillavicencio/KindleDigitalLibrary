@@ -74,7 +74,7 @@
           var files = response.result.files;
           if (files && files.length > 0) {
               var file = files[0];
-              console.log(file.id);
+              readExcel(file.name);
           }    
          else {
 		createAppDataFile();
@@ -97,14 +97,19 @@
         request.then(function(response) {
 		data= response.result.sheets;
 		var findSheet=-1;
+		var sheetName = "";
 		for (var i=0; i < data.length; i++)
 		{
 			if (data[i].properties.sheetId==0){			
 				findSheet=0;
+				sheetName=data[i].properties.name;
 			}
 		}
 		if (findSheet==-1) {
 			createHoja(fileId);	
+		}
+		else {
+			readDataBase(fileId,sheetName+"!A:E");	
 		}
 
       	}, function(reason) {
@@ -118,7 +123,7 @@
       };
 
       var batchUpdateSpreadsheetRequestBody = {
-        requests: [{"addSheet": {"properties": {"sheetId": 0,"title": "prueba2"}}}], 
+        requests: [{"addSheet": {"properties": {"sheetId": 0,"title": "Data"}}}], 
       };
 
       var request = gapi.client.sheets.spreadsheets.batchUpdate(params, batchUpdateSpreadsheetRequestBody);
@@ -130,7 +135,7 @@
     }   
 	      
     function createSheet() {
-      var spreadsheetBody = {"sheets": [{"properties": {"sheetId": 0,"title": "prueba"}}]}
+      var spreadsheetBody = {"sheets": [{"properties": {"sheetId": 0,"title": "Data"}}]}
 
       var request = gapi.client.sheets.spreadsheets.create({}, spreadsheetBody);
       request.then(function(response) {
@@ -146,6 +151,7 @@
 	request.then(function(response) {
         	data= response.result.values;  
 		if (!(data === undefined)) {
+			console.log(data);
 			for (var i = 0; i < data.length; i++) {
 				var id = data[i][0];
 				var description = data[i][1];
@@ -205,7 +211,7 @@
       function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {   
 	  getAppDataFile();
-	  readDataBase('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A:E');
+	  //readDataBase('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A:E');
 	  authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
           disconnectButton.style.display = 'block';
