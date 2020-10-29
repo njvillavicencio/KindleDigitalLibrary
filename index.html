@@ -74,7 +74,7 @@
           var files = response.result.files;
           if (files && files.length > 0) {
               var file = files[0];
-              readExcel(file.name,1);
+              readExcel(file.name);
           }    
          else {
 		createAppDataFile();
@@ -92,8 +92,7 @@
         }).then(function (data) {getAppDataFile();});
         
       };
-   function readExcel(fileId,numbe) {
-	   console.log(numbe);
+   function readExcel(fileId) {
  	var request = gapi.client.sheets.spreadsheets.get({spreadsheetId: fileId});
         request.then(function(response) {
 		data= response.result.sheets;
@@ -149,7 +148,7 @@
    function readDataBase(fileId, range) {
 	var params = {spreadsheetId: fileId,  range: range};	   
 	var request = gapi.client.sheets.spreadsheets.values.get(params);  
-	   readExcel(fileId);
+	//   readExcel(fileId);
 	request.then(function(response) {
         	data= response.result.values;  
 		if (!(data === undefined)) {
