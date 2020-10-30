@@ -16,10 +16,10 @@ $(document).ready(function(){
    
       $("body").on('click',"#guardar", function(){
        var codigo=document.getElementById("codigo").value;
-       var nombre = document.getElementById("descripcion").value;
+       var descripcion = document.getElementById("descripcion").value;
        var cantidad = document.getElementById("cantidad").value;
-       escribirBaseDatos(codigo,nombre);       
-       escribirDatos(fileId, nombreHoja+"!A1:E1",[codigo,nombre,cantidad,0,0]);
+       escribirBaseDatos(codigo,descripcion);       
+       escribirDatos(idArchivo, nombreHoja+"!A1:E1",[codigo,descripcion,cantidad,0,0]);
        document.getElementById("datos").reset()
        escanear();
       });  
