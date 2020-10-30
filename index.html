@@ -45,6 +45,8 @@
       saveButton.disabled="true";
       document.getElementById('descripcion').addEventListener("change", verify)
       var initialized=false;
+      var fileId='';
+	      var sheetName='';
 
       function handleClientLoad() {
         gapi.load('client:auth2', initClient);
@@ -74,8 +76,8 @@
           var files = response.result.files;
           if (files && files.length > 0) {
               var file = files[0];
-		  console.log(file.name);
               readExcel(file.name);
+	      fileId=file.name;
           }    
          else {
 		createSheet();
@@ -98,7 +100,7 @@
         request.then(function(response) {
 		data= response.result.sheets;
 		var findSheet=-1;
-		var sheetName = "";
+		//var sheetName = "";
 		for (var i=0; i < data.length; i++)
 		{
 			if (data[i].properties.sheetId==0){			
