@@ -152,9 +152,9 @@
    }	      
     function validarDescripcion(){
         if(this.value.length > 0) { 
-            guardar.disabled = false; 
+            document.getElementById('guardar').disabled = false; 
         } else { 
-            guardar.disabled = true;
+            document.getElementById('guardar').disabled = true;
         }
     }
    function leerBaseDatos(codigo) {
