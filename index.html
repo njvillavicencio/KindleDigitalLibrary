@@ -90,7 +90,7 @@
         
       };
    function obtenerArchivo(idArchivo) {
- 	var request = gapi.client.sheets.spreadsheets.get({spreadsheetId: fileId});
+ 	var request = gapi.client.sheets.spreadsheets.get({spreadsheetId: idArchivo});
         request.then(function(response) {
 		data= response.result.sheets;
 		var encontrarHoja=-1;
