@@ -21,7 +21,7 @@ $(document).ready(function(){
        var nombre = document.getElementById("descripcion").value;
        var cantidad = document.getElementById("cantidad").value;
        writeCells(codigo,nombre);       
-       writeDataBase('1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY', 'Entradas!A1:E1',[codigo,nombre,cantidad,0,0]);
+       writeDataBase(fileId, sheetName+"!A1:E1",[codigo,nombre,cantidad,0,0]);
        document.getElementById("form_sku").reset()
        escanear();
       });  
