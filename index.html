@@ -74,7 +74,7 @@
           var files = response.result.files;
           if (files && files.length > 0) {
               var file = files[0];
-		  console.log(1);
+		  console.log(file.name);
               readExcel(file.name);
           }    
          else {
