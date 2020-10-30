@@ -146,7 +146,7 @@
 			for (var i = 0; i < datos.length; i++) {
 				var codigo= datos[i][0];
 				var descripcion = datos[i][1];
-				if (!(id in baseDatos)){ 
+				if (!(codigo in baseDatos)){ 
 					baseDatos[codigo]=descripcion
 				}
 			}
