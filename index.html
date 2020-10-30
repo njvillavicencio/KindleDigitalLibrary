@@ -33,12 +33,7 @@
       var CLIENT_ID = '983869916425-495k0u2mf6i377r6c04d1nkleek9qbbj.apps.googleusercontent.com';
       var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4","https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
       var SCOPES = 'https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.appfolder';
-
-      var conectar = document.getElementById('conectar');
-      var desconectar= document.getElementById('desconectar');
-      var escanear= document.getElementById('escanear');
-      var guardar = document.getElementById('guardar'); 
-      guardar.disabled="true";
+      document.getElementById('guardar').disabled="true";
       document.getElementById('descripcion').addEventListener("change", validarDescripcion)
       var initialized=false;
       var idArchivo='';
@@ -57,8 +52,8 @@
         }).then(function () {
           gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
           updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-          conectar.onclick = autentificacionCliente;
-          desconectar.onclick = desconectarCliente;
+          document.getElementById('conectar').onclick = autentificacionCliente;
+          document.getElementById('desconectar').onclick = desconectarCliente;
         });
       }
 
@@ -202,14 +197,14 @@
       function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {   
 	  obtenerDatosApp();
-	  conectar.style.display = 'none';
-          desconectar.style.display = 'block';
-          //escanear.style.display = 'block';
+	  document.getElementById('conectar').style.display = 'none';
+          document.getElementById('desconectar').style.display = 'block';
+          document.getElementById('escanear').style.display = 'block';
         } 
         else {
-          conectar.style.display = 'block';
-          desconectar.style.display = 'none';
-          //escanear.style.display = 'none';
+          document.getElementById('conectar').style.display = 'block';
+          document.getElementById('desconectar').style.display = 'none';
+          document.getElementById('escanear').style.display = 'none';
         }
       }
 
