@@ -55,8 +55,8 @@
           discoveryDocs: DISCOVERY_DOCS,
           scope: SCOPES
         }).then(function () {
-          gapi.auth2.getAuthInstance().isSignedIn.listen(actualizarInicioCliente);
-          actualizarInicioCliente(gapi.auth2.getAuthInstance().isSignedIn.get());
+          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
           conectar.onclick = autentificacionCliente;
           desconectar.onclick = desconectarCliente;
         });
@@ -199,17 +199,17 @@
     }
 
 
-      function actualizarInicioCliente(isSignedIn) {
+      function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {   
 	  obtenerDatosApp();
 	  conectar.style.display = 'none';
           desconectar.style.display = 'block';
-          //escanear.style.display = 'block';
+          escanear.style.display = 'block';
         } 
         else {
           conectar.style.display = 'block';
           desconectar.style.display = 'none';
-          //escanear.style.display = 'none';
+          escanear.style.display = 'none';
         }
       }
 
