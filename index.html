@@ -83,10 +83,10 @@
       });
       }
       
-      function createAppDataFile() {
+      function createAppDataFile(fileId) {
         gapi.client.drive.files.create({
           resource: {
-            name: '1UYFvau6chumF-t7izY-AtOB7TPX_hkEO34uLLWBdIKY',
+            name: fileId,
             parents: ['appDataFolder']
           },
           fields: 'id'
@@ -136,11 +136,11 @@
     }   
 	      
     function createSheet() {
-      var spreadsheetBody = {"sheets": [{"properties": {"sheetId": 0,"title": "Data"}}]}
+      var spreadsheetBody = {"properties": {"title": "BarCodeScanner"},"sheets": [{"properties": {"sheetId": 0,"title": "ScannedData"}}]}
 
       var request = gapi.client.sheets.spreadsheets.create({}, spreadsheetBody);
       request.then(function(response) {
-        console.log(response.result);
+        createAppDataFile(response.result.spreadsheetId);
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       });
