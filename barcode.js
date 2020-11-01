@@ -43,22 +43,22 @@ function escanear(){
                 var codeErrors = [];
                 var median;
                 for (var i=1; i<=result.codeResult.decodedCodes.length-1;i++){
-//                    codeErrors.push(result.codeResult.decodedCodes[i].error);
-                    if (result.codeResult.decodedCodes[i].error>0.1){
-                        validCode=false;
+                    codeErrors.push(result.codeResult.decodedCodes[i].error);
+//                    if (result.codeResult.decodedCodes[i].error>0.1){
+//                        validCode=false;
                         
                     }
                 }              
-//                codeErrors.sort(function(a, b){return a-b});
-//                 if (codeErrors.length % 2 == 0) {
-//                     median=codeErrors[codeErrors.length/2];                    
-//                 }
-//                 else {
-//                     median=(codeErrors[Math.floor(codeErrors.length/2)-1]+codeErrors[Math.floor(codeErrors.length/2)+1])/2;
- //                }
- //                if (median>0.1) {
-//                     validCode=false;
-//                 }
+                codeErrors.sort(function(a, b){return a-b});
+                 if (codeErrors.length % 2 == 0) {
+                     median=codeErrors[codeErrors.length/2];                    
+                 }
+                 else {
+                     median=(codeErrors[Math.floor(codeErrors.length/2)-1]+codeErrors[Math.floor(codeErrors.length/2)+1])/2;
+                 }
+                 if (median>0.1) {
+                     validCode=false;
+                 }
                 
                 if (validCode) {
                     if (detectionHash[result.codeResult.code]>=1){
