@@ -48,8 +48,8 @@ function escanear(){
                 {
                     detectionHash[result.codeResult.code]=1;
                 }
-                console.log(result.codeResult.code,1);
-                if(detectionHash[result.codeResult.decodedCodes] >= 10) {
+                console.log(result.codeResult.decodedCodes,1);
+                if(detectionHash[result.codeResult.code] >= 10) {
                     detectionHash = {};
                     var last_code = result.codeResult.code;
                     console.log(result.codeResult.decodedCodes,222);
