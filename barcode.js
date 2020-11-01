@@ -47,7 +47,7 @@ function escanear(){
 //                    if (result.codeResult.decodedCodes[i].error>0.1){
 //                        validCode=false;
                         
-                    }
+//                    }
                 }              
                 codeErrors.sort(function(a, b){return a-b});
                  if (codeErrors.length % 2 == 0) {
