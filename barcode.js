@@ -55,7 +55,7 @@ function escanear(){
 //                 }
 //                 else {
                      //median=(codeErrors[Math.floor(codeErrors.length/2)-1]+codeErrors[Math.floor(codeErrors.length/2)+1])/2;
-                median=codeErrors[Math.floor(codeErrors.length/2)+1]);
+                median=codeErrors[Math.floor(codeErrors.length/2)+1];
 //                 }
                  if (median>0.1) {
                      validCode=false;
