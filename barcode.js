@@ -38,10 +38,14 @@ function escanear(){
 }
 
 
-
           function getEscaner($btn){
+            let detectionHash={};
             Quagga.onDetected(function(result) {
-                var last_code = result.codeResult.code;
+            detectionHash[result.codeResult.code]++;
+                if(detectionHash[result.codeResult.code] >= 8) {
+                    detectionHash = {};
+                    var last_code = result.codeResult.code;
+                }
                 Quagga.stop();
                 leerBaseDatos(last_code);
                 }
