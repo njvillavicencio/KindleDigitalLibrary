@@ -41,23 +41,30 @@ function escanear(){
           function getEscaner($btn){
             let detectionHash={};
             Quagga.onDetected(function(result) {
-                if (detectionHash[result.codeResult.code]>=1){
-                    detectionHash[result.codeResult.code]=detectionHash[result.codeResult.code]+1;
+                var validCode = true;
+                for (var i=1; result.codeResult.decodedCodes.length-1,i++){
+                    if (result.codeResult.decodedCodes[i].error>0.10){
+                        validCode = false;                    
+                    }                 
                 }
-                else
-                {
-                    detectionHash[result.codeResult.code]=1;
+                if (validCode) {
+                    if (detectionHash[result.codeResult.code]>=1){
+                        detectionHash[result.codeResult.code]=detectionHash[result.codeResult.code]+1;
+                    }
+                    else
+                    {
+                        detectionHash[result.codeResult.code]=1;
+                    }
                 }
-                console.log(result.codeResult.decodedCodes,1);
-                if(detectionHash[result.codeResult.code] >= 10) {
+                if(detectionHash[result.codeResult.code] >= 6) {
                     detectionHash = {};
                     var last_code = result.codeResult.code;
-                    console.log(result.codeResult.decodedCodes,222);
                     Quagga.stop();
                     leerBaseDatos(last_code);
                 }
-                }
-                );
+            },function(reason) {
+       		console.error('error: ' + reason.result.error.message);
+      	});
     
           Quagga.init({
                 inputStream : {
