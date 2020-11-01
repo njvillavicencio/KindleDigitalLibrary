@@ -42,7 +42,8 @@ function escanear(){
             let detectionHash={};
             Quagga.onDetected(function(result) {
             detectionHash[result.codeResult.code]++;
-                if(detectionHash[result.codeResult.code] >= 8) {
+                if(detectionHash[result.codeResult.code] >= 15) {
+                    console.log(detectionHash[result.codeResult.code], result.codeResult.code);
                     detectionHash = {};
                     var last_code = result.codeResult.code;
                 }
