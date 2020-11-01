@@ -33,8 +33,6 @@ function escanear(){
         document.getElementById('cerrar').style.display = 'block';
         document.getElementById('datos').style.display = 'none';
         getEscaner();
-    
-    
 }
 
 
@@ -62,9 +60,7 @@ function escanear(){
                     Quagga.stop();
                     leerBaseDatos(last_code);
                 }
-            },function(reason) {
-       		console.error('error: ' + reason.result.error.message);
-      	});
+            });
     
           Quagga.init({
                 inputStream : {
