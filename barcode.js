@@ -53,9 +53,9 @@ function escanear(){
                     console.log(result.codeResult.code);
                     detectionHash = {};
                     var last_code = result.codeResult.code;
+                    Quagga.stop();
+                    leerBaseDatos(last_code);
                 }
-                Quagga.stop();
-                leerBaseDatos(last_code);
                 }
                 );
     
