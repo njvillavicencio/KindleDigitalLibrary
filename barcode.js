@@ -48,12 +48,11 @@ function escanear(){
                 {
                     detectionHash[result.codeResult.code]=1;
                 }
-            console.log(result.codeResult.code, detectionHash[result.codeResult.code]);
-                
-                if(detectionHash[result.codeResult.code] >= 5) {
-                    console.log(result.codeResult.code);
+                console.log(result.codeResult.code,1);
+                if(detectionHash[result.codeResult.decodedCodes] >= 10) {
                     detectionHash = {};
                     var last_code = result.codeResult.code;
+                    console.log(result.codeResult.decodedCodes,222);
                     Quagga.stop();
                     leerBaseDatos(last_code);
                 }
