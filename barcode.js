@@ -40,11 +40,11 @@ function escanear(){
             let detectionHash={};
             Quagga.onDetected(function(result) {
                 var validCode = true;
-                for (var i=1; result.codeResult.decodedCodes.length-1;i++){
-                    if (result.codeResult.decodedCodes[i].error>0.10){
-                        validCode = false;                    
-                    }                 
-                }
+//               for (var i=1; result.codeResult.decodedCodes.length-1;i++){
+//                    if (result.codeResult.decodedCodes[i].error>0.10){
+//                        validCode = false;                    
+//                    }                 
+//                }
                 if (validCode) {
                     if (detectionHash[result.codeResult.code]>=1){
                         detectionHash[result.codeResult.code]=detectionHash[result.codeResult.code]+1;
@@ -60,7 +60,9 @@ function escanear(){
                     Quagga.stop();
                     leerBaseDatos(last_code);
                 }
-            });
+            },function(reason) {
+       		console.error('error: ' + reason.result.error.message);
+      	});
     
           Quagga.init({
                 inputStream : {
