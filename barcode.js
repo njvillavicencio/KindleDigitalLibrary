@@ -44,6 +44,7 @@ function escanear(){
                 var median;
                 for (var i=1; result.codeResult.decodedCodes.length-1;i++){
                     codeErrors.push(result.codeResult.decodedCodes[i].error);
+                    console.log(result.codeResult.decodedCodes);
                     console.log(result.codeResult.decodedCodes[i].error);
                 }              
                 codeErrors.sort(function(a, b){return a-b});
