@@ -41,7 +41,13 @@ function escanear(){
           function getEscaner($btn){
             let detectionHash={};
             Quagga.onDetected(function(result) {
-            detectionHash[result.codeResult.code]++;
+                if (detectionHash[result.codeResult.code]>=1){
+                    detectionHash[result.codeResult.code]=detectionHash[result.codeResult.code]+1;
+                }
+                else
+                {
+                    detectionHash[result.codeResult.code]=0;
+                }
             console.log(result.codeResult.code, detectionHash[result.codeResult.code]);
                 
                 if(detectionHash[result.codeResult.code] >= 5) {
