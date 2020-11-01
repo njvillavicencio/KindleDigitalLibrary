@@ -46,7 +46,7 @@ function escanear(){
                 }
                 else
                 {
-                    detectionHash[result.codeResult.code]=0;
+                    detectionHash[result.codeResult.code]=1;
                 }
             console.log(result.codeResult.code, detectionHash[result.codeResult.code]);
                 
