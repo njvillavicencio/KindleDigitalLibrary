@@ -39,11 +39,18 @@ function escanear(){
 
 
           function getEscaner($btn){
-            let detectionHash={};
+            let detectionHash=[];
             Quagga.onDetected(function(result) {
-            detectionHash[result.codeResult.code]++;
-                if(detectionHash[result.codeResult.code] >= 15) {
-                    console.log(detectionHash[result.codeResult.code], result.codeResult.code);
+            detectionHash.push(result.codeResult.code);
+                var n=0;
+                for (var i=0; detectionHash.length; i++){
+                    if(result.codeResult.code == detectionHash[i]){
+                        n=n+1;
+                        
+                    }
+                }
+                if(n >= 15) {
+                    console.log(result.codeResult.code);
                     detectionHash = {};
                     var last_code = result.codeResult.code;
                 }
