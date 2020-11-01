@@ -60,9 +60,7 @@ function escanear(){
                     Quagga.stop();
                     leerBaseDatos(last_code);
                 }
-            },function(reason) {
-       		console.error('error: ' + reason.result.error.message);
-      	});
+            });
     
           Quagga.init({
                 inputStream : {
