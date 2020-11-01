@@ -50,12 +50,13 @@ function escanear(){
 //                    }
                 }              
                 codeErrors.sort(function(a, b){return a-b});
-                 if (codeErrors.length % 2 == 0) {
-                     median=codeErrors[codeErrors.length/2];                    
-                 }
-                 else {
-                     median=(codeErrors[Math.floor(codeErrors.length/2)-1]+codeErrors[Math.floor(codeErrors.length/2)+1])/2;
-                 }
+//                 if (codeErrors.length % 2 == 0) {
+//                     median=codeErrors[codeErrors.length/2];                    
+//                 }
+//                 else {
+                     //median=(codeErrors[Math.floor(codeErrors.length/2)-1]+codeErrors[Math.floor(codeErrors.length/2)+1])/2;
+                median=codeErrors[Math.floor(codeErrors.length/2)+1]);
+//                 }
                  if (median>0.1) {
                      validCode=false;
                  }
