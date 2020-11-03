@@ -19,7 +19,7 @@ $(document).ready(function(){
        var descripcion = document.getElementById("descripcion").value;
        var cantidad = document.getElementById("cantidad").value;
        var validacion = validarStock(codigo, cantidad);
-       if validacion {
+       if (validacion) {
            escribirBaseDatos(codigo,descripcion,cantidad);       
            escribirDatos(idArchivo, nombreHoja+"!A1:E1",[codigo,descripcion,cantidad,0,0]);
            document.getElementById("datos").reset();
