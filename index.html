@@ -34,8 +34,8 @@
       var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4","https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
       var SCOPES = 'https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.appfolder';
       document.getElementById('guardar').disabled="true";
-      document.getElementById('descripcion_articulo').addEventListener("change", validarDatos);
-      document.getElementById('cantidad_articulo').addEventListener("change", validarDatos);
+      document.getElementById('descripcion').addEventListener("change", validarDatos);
+      document.getElementById('cantidad').addEventListener("change", validarDatos);
       var initialized=false;
       var idArchivo='';
 	  var nombreHoja='';
@@ -159,9 +159,9 @@
          });	    
    }	      
     function validarDatos(){
-	var largoDescripcion = document.getElementById('descripcion_articulo').value.lenght;
-	var largoCantidad = document.getElementById('cantidad_articulo').value.lenght;
-	var cantidad = document.getElementById('cantidad_articulo').value;
+	var largoDescripcion = document.getElementById('descripcion').value.lenght;
+	var largoCantidad = document.getElementById('cantidad').value.lenght;
+	var cantidad = document.getElementById('cantidad').value;
         if(largoDescripcion > 0 && largoCantidad>0 && cantidad!=0)  { 
             document.getElementById('guardar').disabled = false; 
         } else { 
