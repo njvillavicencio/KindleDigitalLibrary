@@ -18,9 +18,9 @@ $(document).ready(function(){
        var codigo=document.getElementById("codigo").value;
        var descripcion = document.getElementById("descripcion").value;
        var cantidad = document.getElementById("cantidad").value;
-       var validacion = validarStock(codigo, cantidad);
+       var validacion = validarStock(codigo, parseInt(cantidad));
        if (validacion) {
-           escribirBaseDatos(codigo,descripcion,cantidad);       
+           escribirBaseDatos(codigo,descripcion,parseInt(cantidad));       
            escribirDatos(idArchivo, nombreHoja+"!A1:E1",[codigo,descripcion,cantidad,0,0]);
            document.getElementById("datos").reset();
            escanear();
