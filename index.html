@@ -144,12 +144,13 @@
 			for (var i = 0; i < datos.length; i++) {
 				var codigo= datos[i][0];
 				var descripcion = datos[i][1];
+var cantidad = parseInt(datos[i][2]);
 				if (!(codigo in baseDatos)){ 
 					baseDatos[codigo]=descripcion
-					balanceStock[codigo]=datos[i][2];
+					balanceStock[codigo]=cantidad;
 				}
 				else {
-					balanceStock[codigo]=balanceStock[codigo]+datos[i][2]
+					balanceStock[codigo]=balanceStock[codigo]+cantidad;
 					console.log(balanceStock[codigo]);
 				}
 				
