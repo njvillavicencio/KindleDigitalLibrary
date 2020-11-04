@@ -160,9 +160,9 @@
    }	      
     function validarDatos(){
 	var largoDescripcion = document.getElementById('descripcion').value.length;
-	var cantidad = document.getElementById('cantidad').value;
-	    console.log(largoDescripcion, cantidad);
-        if(largoDescripcion > 0 && Number.isInteger(cantidad) && cantidad!=0)  { 
+	var largoCantidad = document.getElementById('cantidad').value.length;
+	var cantidad = parseInt(document.getElementById('cantidad').value);
+        if(largoDescripcion > 0 && largoCantidad>0 && cantidad!=0)  { 
             document.getElementById('guardar').disabled = false; 
         } else { 
             document.getElementById('guardar').disabled = true;
