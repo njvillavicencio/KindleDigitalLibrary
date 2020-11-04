@@ -25,6 +25,10 @@ $(document).ready(function(){
            document.getElementById("datos").reset();
            escanear();
        }
+       else {
+           alert("Este artículo no tiene stock suficiente.");
+           
+       }
       });  
     
 
