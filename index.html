@@ -35,6 +35,7 @@
       var SCOPES = 'https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.appfolder';
       document.getElementById('guardar').disabled="true";
       document.getElementById('descripcion').addEventListener("change", validarDatos);
+      document.getElementById('cantidad').addEventListener("change", validarDatos);
       var initialized=false;
       var idArchivo='';
 	  var nombreHoja='';
