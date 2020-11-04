@@ -159,10 +159,10 @@
          });	    
    }	      
     function validarDatos(){
-	var largoDescripcion = document.getElementById('descripcion').value;
+	var largoDescripcion = document.getElementById('descripcion').value.length;
 	var cantidad = document.getElementById('cantidad').value;
 	    console.log(largoDescripcion, cantidad);
-        if(largoDescripcion > 0 && cantidad!="" && cantidad!=0)  { 
+        if(largoDescripcion > 0 && Number.isInteger(cantidad) && cantidad!=0)  { 
             document.getElementById('guardar').disabled = false; 
         } else { 
             document.getElementById('guardar').disabled = true;
