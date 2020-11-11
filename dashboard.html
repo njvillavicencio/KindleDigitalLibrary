@@ -80,6 +80,8 @@
             <button type="button" class="btn btn-sm btn-outline-secondary" id='escanear'>Escanear</button>
             <button type="button" class="btn btn-sm btn-outline-secondary" id='cerrar'>Cerrar</button>
             <button type="button" class="btn btn-sm btn-outline-secondary" id='descargar'>Descargar</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id='conectar'>Descargar</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id='desconectar'>Descargar</button>
           </div>
         </div>
       </div>
@@ -103,16 +105,32 @@
   <script src="jquery191.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/serratus/quaggaJS/dist/quagga.js"></script>
   <script src="barcode.js"></script>;
+  <script src="initclient.js"></script>
   <script type="text/javascript">
     document.getElementById('escanear').style.display='block';
     document.getElementById('cerrar').style.display='none';
+    document.getElementById('conectar').style.display='none';
+    document.getElementById('desconectar').style.display='none';
     document.getElementById('guardar').disabled="true";
     document.getElementById('descripcion').addEventListener("change", validarDatos);
     document.getElementById('cantidad').addEventListener("change", validarDatos);
+    var CLIENT_ID = '983869916425-495k0u2mf6i377r6c04d1nkleek9qbbj.apps.googleusercontent.com';
+    var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+    var SCOPES = 'https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.appdata';
     var idArchivo='';
     var nombreHoja='';
     var baseDatos = {};
     var balanceStock = {};
+    var initialized=false;
+    function updateSigninStatus(isSignedIn) {
+      if (isSignedIn) {   
+        obtenerDatosApp();
+      } 
+    }
+  </script>
+  <script async defer src="https://apis.google.com/js/api.js"
+  onload="this.onload=function(){};cargarCliente()"
+  onreadystatechange="if (this.readyState === 'complete') this.onload()">
   </script>
       
       </body>
