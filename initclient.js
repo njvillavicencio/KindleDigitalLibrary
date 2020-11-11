@@ -17,16 +17,6 @@
         });
       }
 
-      function updateSigninStatus(isSignedIn) {
-        if (isSignedIn) {   
-          document.getElementById('continuar').onclick = window.location.href="dashboard.html"; 
-          document.getElementById('desconectar').style.display = 'block';
-        } 
-        else {
-          document.getElementById('desconectar').style.display = 'none';
-        }
-      }
-
       function autentificacionCliente(event) {
         initialized=true;
         gapi.auth2.getAuthInstance().signIn({ux_mode: "redirect"});
