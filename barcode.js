@@ -2,9 +2,11 @@ $(document).ready(function(){
 
 
     $("body").on('click',"#escanear", function(){
-        // $('#form_persona').show();
-        // document.getElementById('form_persona').style.display = 'block';
-        escanear();
+        getEscaner();
+        document.getElementById('escaner').style.display = 'block';
+        document.getElementById('escanear').style.display = 'none';
+        document.getElementById('cerrar').style.display = 'block';
+        document.getElementById('datos').style.display = 'none';
       });  
 
       $("body").on('click',"#cerrar", function(){
@@ -20,14 +22,13 @@ $(document).ready(function(){
        var cantidad = document.getElementById("cantidad").value;
        var validacion = validarStock(codigo, parseInt(cantidad));
        if (validacion) {
-           escribirBaseDatos(codigo,descripcion,parseInt(cantidad));       
-           escribirDatos(idArchivo, nombreHoja+"!A1:E1",[codigo,descripcion,cantidad,0,0]);
+// pormientras           escribirBaseDatos(codigo,descripcion,parseInt(cantidad));       
+// pormientras           escribirDatos(idArchivo, nombreHoja+"!A1:E1",[codigo,descripcion,cantidad,0,0]);
            document.getElementById("datos").reset();
            escanear();
        }
        else {
-           alert("Este artículo no tiene stock suficiente.");
-           
+           alert("Este artículo no tiene stock suficiente.");           
        }
       });  
     
@@ -35,11 +36,11 @@ $(document).ready(function(){
 });
 
 function escanear(){
-        document.getElementById('escaner').style.display = 'block';
+        getEscaner();
+            document.getElementById('escaner').style.display = 'block';
         document.getElementById('escanear').style.display = 'none';
         document.getElementById('cerrar').style.display = 'block';
         document.getElementById('datos').style.display = 'none';
-        getEscaner();
 }
 
 
@@ -81,7 +82,7 @@ function escanear(){
                     detectionHash = {};
                     var last_code = result.codeResult.code;
                     Quagga.stop();
-                    leerBaseDatos(last_code);
+// por mientras                    leerBaseDatos(last_code);
                 }
             },function(reason) {
        		console.error('error: ' + reason.result.error.message);
