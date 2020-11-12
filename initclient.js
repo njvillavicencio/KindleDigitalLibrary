@@ -11,7 +11,6 @@
           scope: SCOPES
         }).then(function () {
           gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-                            console.log('hola');
           updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
           document.getElementById('desconectar').onclick = desconectarCliente;
           document.getElementById('continuar').onclick = autentificacionCliente;   
