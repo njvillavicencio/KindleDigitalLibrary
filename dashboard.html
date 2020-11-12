@@ -40,7 +40,7 @@
   </button>
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">Desconectar</a>
+      <a class="nav-link" href="#" id="desconectar">Desconectar</a>
     </li>
   </ul>
 </nav>
@@ -81,7 +81,6 @@
             <button type="button" class="btn btn-sm btn-outline-secondary" id='cerrar'>Cerrar</button>
             <button type="button" class="btn btn-sm btn-outline-secondary" id='descargar'>Descargar</button>
             <button type="button" class="btn btn-sm btn-outline-secondary" id='conectar'>Descargar</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary" id='desconectar'>Desconectar</button>
           </div>
         </div>
       </div>
@@ -127,7 +126,8 @@
     var balanceStock = {};
     var initialized=false;
     function updateSigninStatus(isSignedIn) {
-      if (isSignedIn) {   
+      if (isSignedIn) {  
+        console.log(isSignedIn);
         obtenerDatosApp();
       } 
     }
