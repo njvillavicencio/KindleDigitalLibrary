@@ -81,7 +81,7 @@
             <button type="button" class="btn btn-sm btn-outline-secondary" id='cerrar'>Cerrar</button>
             <button type="button" class="btn btn-sm btn-outline-secondary" id='descargar'>Descargar</button>
             <button type="button" class="btn btn-sm btn-outline-secondary" id='conectar'>Descargar</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary" id='desconectar'>Descargar</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id='desconectar'>Desconectar</button>
           </div>
         </div>
       </div>
@@ -114,7 +114,7 @@
     document.getElementById('escanear').style.display='block';
     document.getElementById('cerrar').style.display='none';
     document.getElementById('conectar').style.display='none';
-    document.getElementById('conectar').style.display.onclick=desconectarCliente;
+    document.getElementById('desconectar').onclick=desconectarCliente;
     document.getElementById('guardar').disabled="true";
     document.getElementById('descripcion').addEventListener("change", validarDatos);
     document.getElementById('cantidad').addEventListener("change", validarDatos);
