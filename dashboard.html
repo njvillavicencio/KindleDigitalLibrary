@@ -127,6 +127,7 @@
     var initialized=false;
     function updateSigninStatus(isSignedIn) {
       if (isSignedIn) {  
+        document.getElementById('desconectar').onclick = desconectarCliente;
         obtenerDatosApp();
       } 
     }
