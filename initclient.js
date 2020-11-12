@@ -17,6 +17,12 @@
         });
       }
 
+    function updateSigninStatus(isSignedIn) {
+      if (isSignedIn) {   
+        obtenerDatosApp();
+      } 
+    }
+
       function autentificacionCliente(event) {
         initialized=true;
         gapi.auth2.getAuthInstance().signIn({ux_mode: "redirect"});
