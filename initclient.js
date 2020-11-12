@@ -1,19 +1,4 @@
-    function obtenerDatosApp2() {
-        gapi.client.drive.files.list({
-          spaces: 'appDataFolder',
-          fields: 'files(id,name)'
-        }).then(function(response) {
-          var archivos = response.result.files;
-          if (archivos && archivos.length > 0) {
-            var archivo = archivos[0];
-            obtenerArchivo(archivo.name);
-	        idArchivo=archivo.name;
-          }    
-         else {
-		    crearArchivo();
-	      }
-        });
-      }
+
 
       function cargarCliente() {
         gapi.load('client:auth2', iniciarCliente);
