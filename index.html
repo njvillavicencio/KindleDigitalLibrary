@@ -38,7 +38,7 @@
       <h3 class="masthead-brand">BarCode Scanner</h3>
       <nav class="nav nav-masthead justify-content-center">
         <a class="nav-link active" href="#">Inicio</a>
-        <a class="nav-link" href="escanear.html" id="escanear">Escanear</a>
+        <a class="nav-link" href="dashboard.html" id="escanear">Escanear</a>
       </nav>
     </div>
   </header>
@@ -68,7 +68,7 @@
   document.getElementById("desconectar").style.display='none';
   function updateSigninStatus(isSignedIn) {
   if (isSignedIn) {   
-    document.getElementById('continuar').onclick = window.location.href="dashboard.html"; 
+    //document.getElementById('continuar').onclick = window.location.href="dashboard.html"; 
     document.getElementById('desconectar').style.display = 'block';
   } 
   else {
