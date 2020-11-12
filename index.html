@@ -68,7 +68,9 @@
   document.getElementById("desconectar").style.display='none';
   function updateSigninStatus(isSignedIn) {
   if (isSignedIn) {   
-    //document.getElementById('continuar').onclick = window.location.href="dashboard.html"; 
+    //document.getElementById('continuar').onclick = window.location.href="dashboard.html";
+    document.getElementById('desconectar').onclick = desconectarCliente;
+    document.getElementById('continuar').onclick = autentificacionCliente;   
     document.getElementById('desconectar').style.display = 'block';
   } 
   else {
