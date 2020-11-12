@@ -12,6 +12,7 @@
         }).then(function () {
           gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
           updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+              console.log('hola');
           document.getElementById('desconectar').onclick = desconectarCliente;
           document.getElementById('continuar').onclick = autentificacionCliente;   
         });
