@@ -12,21 +12,7 @@
         }).then(function () {
           gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
               
-          gapi.client.drive.files.list({
-          spaces: 'appDataFolder',
-          fields: 'files(id,name)'
-        }).then(function(response) {
-          var archivos = response.result.files;
-          if (archivos && archivos.length > 0) {
-            var archivo = archivos[0];
-            obtenerArchivo(archivo.name);
-	        idArchivo=archivo.name;
-          }    
-         else {
-		    crearArchivo();
-	      }
-        });    
-              
+console.log(gapi);
               
               
           updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
