@@ -217,7 +217,7 @@ $(document).ready(function(){
                 }              
                 codeErrors.sort(function(a, b){return a-b});
                 median=codeErrors[Math.floor(codeErrors.length/2)+1];
-                 if (median>0.1) {
+                 if (median>0.11) {
                      validCode=false;
                  }            
                 if (validCode) {
@@ -233,6 +233,7 @@ $(document).ready(function(){
                     detectionHash = {};
                     var last_code = result.codeResult.code;
                     Quagga.stop();
+	            document.getElementById('cerrar').style.display = 'none';
                     leerBaseDatos(last_code);
                 }
             },function(reason) {
