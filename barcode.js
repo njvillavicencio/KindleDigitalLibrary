@@ -21,7 +21,7 @@ $(document).ready(function(){
        var validacion = validarStock(codigo, parseInt(cantidad));
        if (validacion) {
            escribirBaseDatos(codigo,descripcion,parseInt(cantidad));       
-           escribirDatos(idArchivo, nombreHoja+"!A1:E1",[codigo,descripcion,cantidad,Date.now(),0]);
+           escribirDatos(idArchivo, nombreHoja+"!A1:E1",[codigo,descripcion,cantidad,Date.now(),+ new Date()]);
            document.getElementById("datos").reset();
            escanear();
        }
