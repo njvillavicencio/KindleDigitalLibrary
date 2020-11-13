@@ -87,15 +87,31 @@
       </div>
     <div id='escaner'>
     </div>
+        
     <form style="display: none" id="datos">
-            <label for="codigo_articulo">Código de Barra</label>
-            <input type="text" id='codigo' placeholder="">
-            <label for="descripcion_articulo">Descripción del producto</label>
-            <input type="text" id='descripcion' placeholder="">
-            <label for="cantidad_articulo">Cantidad</label>
-            <input type="number" id='cantidad' placeholder="">
+    <div class="form-row">
+    <div class="form-group col-md">
+    <label for="codigo_articulo">Código de Barra</label>
+    <input type="text" class="form-control" id='codigo' placeholder="" required>
+    </div>
+    </div>
+
+    <div class="form-row">
+    <div class="form-group col-md">
+    <label for="descripcion_articulo">Descripción del producto</label>
+    <input type="text" class="form-control" id='descripcion' placeholder="" required>
+    </div>
+    </div>
+
+    <div class="form-row">
+    <div class="form-group col-md">
+      <label for="cantidad_articulo">Cantidad</label>
+      <input type="number" class="form-control" id='cantidad' placeholder="" required>
+    </div>
+    </div>
     <button id="guardar" type="button" class="btn btn-sm btn-outline-secondary">Guardar</button>  
     </form>
+        
     </main>
   </div>
 </div>
