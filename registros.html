@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>Dashboard Template · Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+
+    <!-- Bootstrap core CSS -->
+        <link href="bootstrap_min.css" rel="stylesheet" crossorigin="anonymous" />
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="dashboardStyle.css" rel="stylesheet">
+    <link href="barcode.css" rel="stylesheet" />
+  </head>
+  <body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">BarCode Scanner</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <a class="nav-link" href="#" id="desconectar">Desconectar</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="sidebar-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              <span data-feather="home"></span>
+              Inicio <span class="sr-only">(current)</span>
+            </a>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Reportes</span>
+          </a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Reporte de Stock
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Registro de productos</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary" id='escanear'>Escanear</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id='cerrar'>Cerrar</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id='descargar'>Descargar</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id='conectar'>Descargar</button>
+          </div>
+        </div>
+      </div>
+    <div id='escaner'>
+    </div>
+        
+    <form style="display: none" id="datos">
+    <div class="form-row">
+    <div class="form-group col-md">
+    <label for="codigo_articulo">Código de Barra</label>
+    <input type="text" class="form-control" id='codigo' placeholder="" required>
+    </div>
+    </div>
+
+    <div class="form-row">
+    <div class="form-group col-md">
+    <label for="descripcion_articulo">Descripción del producto</label>
+    <input type="text" class="form-control" id='descripcion' placeholder="" required>
+    </div>
+    </div>
+
+    <div class="form-row">
+    <div class="form-group col-md">
+      <label for="cantidad_articulo">Cantidad</label>
+      <input type="number" class="form-control" id='cantidad' placeholder="" required>
+    </div>
+    </div>
+    <button id="guardar" type="button" class="btn btn-sm btn-outline-secondary">Guardar</button>  
+    </form>
+        
+    </main>
+  </div>
+</div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="dashboard.js"></script>  
+  <script src="jquery191.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/serratus/quaggaJS/dist/quagga.js"></script>
+  <script src="barcode.js"></script>
+  <script src="initclient.js"></script>
+  <script async defer src="https://apis.google.com/js/api.js"
+    onload="this.onload=function(){};cargarCliente()"
+    onreadystatechange="if (this.readyState === 'complete') this.onload()">
+  </script>
+  <script type="text/javascript">
+    document.getElementById('escanear').style.display='block';
+    document.getElementById('cerrar').style.display='none';
+    document.getElementById('conectar').style.display='none';
+    document.getElementById('desconectar').onclick=desconectarCliente;
+    document.getElementById('guardar').disabled="true";
+    document.getElementById('descripcion').addEventListener("change", validarDatos);
+    document.getElementById('cantidad').addEventListener("change", validarDatos);
+    var CLIENT_ID = '983869916425-495k0u2mf6i377r6c04d1nkleek9qbbj.apps.googleusercontent.com';
+    var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4","https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
+    var SCOPES = 'https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.appdata';
+    var idArchivo='';
+    var nombreHoja='';
+    var baseDatos = {};
+    var balanceStock = {};
+    var initialized=false;
+    function updateSigninStatus(isSignedIn) {
+      if (isSignedIn) {  
+        document.getElementById('desconectar').onclick = desconectarCliente;
+        obtenerDatosApp();
+      } 
+    }
+  </script>
+
+      
+  </body>
+
+  
+</html>
