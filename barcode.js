@@ -281,12 +281,14 @@ $(document).ready(function(){
                      }
 			 
                  }
-		 if (detectionHash[(result.codeResult.code,'normal')]>=1){
-			detectionHash[(result.codeResult.code,'normal')]=detectionHash[(result.codeResult.code,'normal')]+1;
-		 }
-		 else
-		 {
-			detectionHash[(result.codeResult.code,'normal')]=1;
+		 if (median <=0.2){
+			 if (detectionHash[(result.codeResult.code,'normal')]>=1){
+				detectionHash[(result.codeResult.code,'normal')]=detectionHash[(result.codeResult.code,'normal')]+1;
+			 }
+			 else
+			 {
+				detectionHash[(result.codeResult.code,'normal')]=1;
+			 }
 		 }
 
                 if(detectionHash[(result.codeResult.code,'median')] >= 5 || detectionHash[(result.codeResult.code,'maximum')]>=2 || 
