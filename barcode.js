@@ -248,8 +248,8 @@ $(document).ready(function(){
                 median=codeErrors[Math.floor(codeErrors.length/2)+1];
 		maximum=Math.max.apply(null, codeErrors);
 		mean = codeErrors => codeErrors.reduce((a,b) => a + b, 0) / codeErrors.length;
-                 if (median<=0.11) {
-			 alert("mediana"+detectionHash[(result.codeResult.code,'median')]);
+                 if (median<=0.12) {
+			// alert("mediana"+detectionHash[(result.codeResult.code,'median')]);
 		     if (detectionHash[(result.codeResult.code,'median')]>=1){
                         detectionHash[(result.codeResult.code,'median')]=detectionHash[(result.codeResult.code,'median')]+1;
                      }
@@ -259,8 +259,8 @@ $(document).ready(function(){
                      }
 			 
                  }
-                 if (mean<=0.05 && median<=0.15) {
-			 alert("media"+detectionHash[(result.codeResult.code,'mean')]);
+                 if (mean<=0.07 && median<=0.15) {
+			// alert("media"+detectionHash[(result.codeResult.code,'mean')]);
 		     if (detectionHash[(result.codeResult.code,'mean')]>=1){
                         detectionHash[(result.codeResult.code,'mean')]=detectionHash[(result.codeResult.code,'mean')]+1;
                      }
@@ -271,7 +271,7 @@ $(document).ready(function(){
 			 
                  }
                  if (maximum<=0.15) {
-			 alert("maximo"+detectionHash[(result.codeResult.code,'maximum')]);
+			// alert("maximo"+detectionHash[(result.codeResult.code,'maximum')]);
 		     if (detectionHash[(result.codeResult.code,'maximum')]>=1){
                         detectionHash[(result.codeResult.code,'maximum')]=detectionHash[(result.codeResult.code,'maximum')]+1;
                      }
@@ -281,8 +281,16 @@ $(document).ready(function(){
                      }
 			 
                  }
+		 if (detectionHash[(result.codeResult.code,'normal')]>=1){
+			detectionHash[(result.codeResult.code,'normal')]=detectionHash[(result.codeResult.code,'normal')]+1;
+		 }
+		 else
+		 {
+			detectionHash[(result.codeResult.code,'normal')]=1;
+		 }
 
-                if(detectionHash[(result.codeResult.code,'median')] >= 5 || detectionHash[(result.codeResult.code,'maximum')]>=2 || detectionHash[(result.codeResult.code,'mean')]>=8) {
+                if(detectionHash[(result.codeResult.code,'median')] >= 5 || detectionHash[(result.codeResult.code,'maximum')]>=2 || 
+		   detectionHash[(result.codeResult.code,'mean')]>=8 || detectionHash[(result.codeResult.code,'normal')]>=20) {
                     detectionHash = {};
                     var last_code = result.codeResult.code;
                     Quagga.stop();
