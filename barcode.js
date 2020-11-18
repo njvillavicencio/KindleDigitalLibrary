@@ -237,27 +237,49 @@ $(document).ready(function(){
 		  
 		  
             Quagga.onDetected(function(result) {
-                var validCode = true;
                 var codeErrors = [];
                 var median;
+		var maximum;
+		var mean;
                 for (var i=1; i<=result.codeResult.decodedCodes.length-1;i++){
                     codeErrors.push(result.codeResult.decodedCodes[i].error);
                 }              
                 codeErrors.sort(function(a, b){return a-b});
                 median=codeErrors[Math.floor(codeErrors.length/2)+1];
-                 if (median>0.11) {
-                     validCode=false;
-                 }            
-                if (validCode) {
-                    if (detectionHash[result.codeResult.code]>=1){
-                        detectionHash[result.codeResult.code]=detectionHash[result.codeResult.code]+1;
-                    }
-                    else
-                    {
-                        detectionHash[result.codeResult.code]=1;
-                    }
-                }
-                if(detectionHash[result.codeResult.code] >= 5) {
+		maximum=Math.max.apply(null, codeErrors);
+		mean = codeErrors => codeErrors.reduce((a,b) => a + b, 0) / codeErrors.length;
+                 if (median<=0.12) {
+		     if (detectionHash[(result.codeResult.code,'median')]>=1){
+                        detectionHash[(result.codeResult.code,'median')]=detectionHash[(result.codeResult.code,'median')]+1;
+                     }
+                     else
+                     {
+                        detectionHash[(result.codeResult.code,'median')]=1;
+                     }
+			 
+                 }
+                 if (mean<=0.1) {
+		     if (detectionHash[(result.codeResult.code,'mean')]>=1){
+                        detectionHash[(result.codeResult.code,'mean')]=detectionHash[(result.codeResult.code,'mean')]+1;
+                     }
+                     else
+                     {
+                        detectionHash[(result.codeResult.code,'mean')]=1;
+                     }
+			 
+                 }
+                 if (maximum<=0.15) {
+		     if (detectionHash[(result.codeResult.code,'maximum')]>=1){
+                        detectionHash[(result.codeResult.code,'maximum')]=detectionHash[(result.codeResult.code,'maximum')]+1;
+                     }
+                     else
+                     {
+                        detectionHash[(result.codeResult.code,'maximum')]=1;
+                     }
+			 
+                 }
+
+                if(detectionHash[(result.codeResult.code,'median')] >= 4 or detectionHash[(result.codeResult.code,'maximum')]>=1 or detectionHash[(result.codeResult.code,'mean')]>=8) {
                     detectionHash = {};
                     var last_code = result.codeResult.code;
                     Quagga.stop();
