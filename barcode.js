@@ -210,7 +210,6 @@ $(document).ready(function(){
 	   let detectionHash={};
 		  
 	  	Quagga.onProcessed(function(result) {
-		console.log(result);
       	  	var drawingCtx = Quagga.canvas.ctx.overlay,
          	drawingCanvas = Quagga.canvas.dom.overlay;
 
