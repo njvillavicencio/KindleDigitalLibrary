@@ -279,7 +279,7 @@ $(document).ready(function(){
 			 
                  }
 
-                if(detectionHash[(result.codeResult.code,'median')] >= 4 or detectionHash[(result.codeResult.code,'maximum')]>=1 or detectionHash[(result.codeResult.code,'mean')]>=8) {
+                if(detectionHash[(result.codeResult.code,'median')] >= 4 || detectionHash[(result.codeResult.code,'maximum')]>=1 || detectionHash[(result.codeResult.code,'mean')]>=8) {
                     detectionHash = {};
                     var last_code = result.codeResult.code;
                     Quagga.stop();
