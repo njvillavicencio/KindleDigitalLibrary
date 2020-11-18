@@ -259,7 +259,7 @@ $(document).ready(function(){
                      }
 			 
                  }
-                 if (mean<=0.07 && median<=0.15) {
+                 if (mean<=0.07 && median<=0.13) {
 			// alert("media"+detectionHash[(result.codeResult.code,'mean')]);
 		     if (detectionHash[(result.codeResult.code,'mean')]>=1){
                         detectionHash[(result.codeResult.code,'mean')]=detectionHash[(result.codeResult.code,'mean')]+1;
@@ -281,7 +281,7 @@ $(document).ready(function(){
                      }
 			 
                  }
-		 if (median <=0.2){
+		 if (median <=0.15){
 			 if (detectionHash[(result.codeResult.code,'normal')]>=1){
 				detectionHash[(result.codeResult.code,'normal')]=detectionHash[(result.codeResult.code,'normal')]+1;
 			 }
