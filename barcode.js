@@ -248,7 +248,7 @@ $(document).ready(function(){
                 median=codeErrors[Math.floor(codeErrors.length/2)+1];
 		maximum=Math.max.apply(null, codeErrors);
 		mean = codeErrors => codeErrors.reduce((a,b) => a + b, 0) / codeErrors.length;
-                 if (median<=0.12) {
+                 if (median<=0.11) {
 		     if (detectionHash[(result.codeResult.code,'median')]>=1){
                         detectionHash[(result.codeResult.code,'median')]=detectionHash[(result.codeResult.code,'median')]+1;
                      }
@@ -268,7 +268,7 @@ $(document).ready(function(){
                      }
 			 
                  }
-                 if (maximum<=0.15) {
+                 if (maximum<=0.10) {
 		     if (detectionHash[(result.codeResult.code,'maximum')]>=1){
                         detectionHash[(result.codeResult.code,'maximum')]=detectionHash[(result.codeResult.code,'maximum')]+1;
                      }
