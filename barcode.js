@@ -258,7 +258,7 @@ $(document).ready(function(){
                      }
 			 
                  }
-                 if (mean<=0.07 && median<=0.12) {//la idea es agregar criterios adicionales
+                 if (mean<=0.1 && median<=0.12) {//la idea es agregar criterios adicionales
 		     if (detectionHash[(result.codeResult.code,'mean')]>=1){
                         detectionHash[(result.codeResult.code,'mean')]=detectionHash[(result.codeResult.code,'mean')]+1;
                      }
@@ -278,7 +278,7 @@ $(document).ready(function(){
                      }
 			 
                  }
-		 if (median <=0.12){ //la idea es que se pueda tomar un criterio cuando la mediana es mayor.
+		 if (median <=0.01){ //la idea es que se pueda tomar un criterio cuando la mediana es mayor.
 			 if (detectionHash[(result.codeResult.code,'normal')]>=1){
 				detectionHash[(result.codeResult.code,'normal')]=detectionHash[(result.codeResult.code,'normal')]+1;
 			 }
