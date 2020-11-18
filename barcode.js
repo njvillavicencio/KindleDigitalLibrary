@@ -249,7 +249,6 @@ $(document).ready(function(){
 		maximum=Math.max.apply(null, codeErrors);
 		mean = codeErrors => codeErrors.reduce((a,b) => a + b, 0) / codeErrors.length;
                  if (median<=0.12) {
-			// alert("mediana"+detectionHash[(result.codeResult.code,'median')]);
 		     if (detectionHash[(result.codeResult.code,'median')]>=1){
                         detectionHash[(result.codeResult.code,'median')]=detectionHash[(result.codeResult.code,'median')]+1;
                      }
@@ -259,8 +258,7 @@ $(document).ready(function(){
                      }
 			 
                  }
-                 if (mean<=0.07 && median<=0.13) {
-			// alert("media"+detectionHash[(result.codeResult.code,'mean')]);
+                 if (mean<=0.07 && median<=0.12) {//la idea es agregar criterios adicionales
 		     if (detectionHash[(result.codeResult.code,'mean')]>=1){
                         detectionHash[(result.codeResult.code,'mean')]=detectionHash[(result.codeResult.code,'mean')]+1;
                      }
@@ -271,7 +269,6 @@ $(document).ready(function(){
 			 
                  }
                  if (maximum<=0.15) {
-			// alert("maximo"+detectionHash[(result.codeResult.code,'maximum')]);
 		     if (detectionHash[(result.codeResult.code,'maximum')]>=1){
                         detectionHash[(result.codeResult.code,'maximum')]=detectionHash[(result.codeResult.code,'maximum')]+1;
                      }
@@ -281,7 +278,7 @@ $(document).ready(function(){
                      }
 			 
                  }
-		 if (median <=0.15){
+		 if (median <=0.12){ //la idea es que se pueda tomar un criterio cuando la mediana es mayor.
 			 if (detectionHash[(result.codeResult.code,'normal')]>=1){
 				detectionHash[(result.codeResult.code,'normal')]=detectionHash[(result.codeResult.code,'normal')]+1;
 			 }
