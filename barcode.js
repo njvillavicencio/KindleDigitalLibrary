@@ -247,7 +247,7 @@ $(document).ready(function(){
                 median=codeErrors[Math.floor(codeErrors.length/2)+1];
 		maximum=Math.max.apply(null, codeErrors);
 		mean = codeErrors => codeErrors.reduce((a,b) => a + b, 0) / codeErrors.length;
-                 if (median<=0.11) {
+                 if (median<=0.10) {
 		     if (detectionHash[(result.codeResult.code,'median')]>=1){
                         detectionHash[(result.codeResult.code,'median')]=detectionHash[(result.codeResult.code,'median')]+1;
                      }
@@ -257,7 +257,7 @@ $(document).ready(function(){
                      }
 			 
                  }
-                 if (mean<=0.08 && median<=0.12) {//la idea es agregar criterios adicionales
+                 if (mean<=0.05 && median<=0.12) {//la idea es agregar criterios adicionales
 		     if (detectionHash[(result.codeResult.code,'mean')]>=1){
                         detectionHash[(result.codeResult.code,'mean')]=detectionHash[(result.codeResult.code,'mean')]+1;
                      }
