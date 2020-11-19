@@ -236,58 +236,64 @@ $(document).ready(function(){
 		  
 		  
             Quagga.onDetected(function(result) {
-                var codeErrors = [];
+                var barcodeErrors = [];
+		var barcodeCodes = [];
                 var median;
 		var maximum;
 		var mean;
+		var minimum;
 		
                 for (var i=1; i<=result.codeResult.decodedCodes.length-1;i++){
-                    codeErrors.push(result.codeResult.decodedCodes[i].error);
+                    barcodeErrors.push(result.codeResult.decodedCodes[i].error);
+		    barcodeCodes.push(result.codeResult.decodedCodes[i].code);
                 }              
-                codeErrors.sort(function(a, b){return a-b});
-                median=codeErrors[Math.floor(codeErrors.length/2)+1];
-		maximum=Math.max.apply(null, codeErrors);
-		mean = codeErrors => codeErrors.reduce((a,b) => a + b, 0) / codeErrors.length;
-                 if (median<=0.10) {
-console.log(result.codeResult);
-		     if (detectionHash[(result.codeResult.code,'median')]>=1){
-                        detectionHash[(result.codeResult.code,'median')]=detectionHash[(result.codeResult.code,'median')]+1;
-                     }
-                     else
-                     {
-                        detectionHash[(result.codeResult.code,'median')]=1;
-                     }
-			 
-                 }
-                 if (mean<=0.05 && median<=0.12) {//la idea es agregar criterios adicionales
-		     if (detectionHash[(result.codeResult.code,'mean')]>=1){
-                        detectionHash[(result.codeResult.code,'mean')]=detectionHash[(result.codeResult.code,'mean')]+1;
-                     }
-                     else
-                     {
-                        detectionHash[(result.codeResult.code,'mean')]=1;
-                     }
-			 
-                 }
-                 if (maximum<=0.08) {
-		     if (detectionHash[(result.codeResult.code,'maximum')]>=1){
-                        detectionHash[(result.codeResult.code,'maximum')]=detectionHash[(result.codeResult.code,'maximum')]+1;
-                     }
-                     else
-                     {
-                        detectionHash[(result.codeResult.code,'maximum')]=1;
-                     }
-			 
-                 }
-		 if (median <=0.01){ //la idea es que se pueda tomar un criterio cuando la mediana es mayor.
-			 if (detectionHash[(result.codeResult.code,'normal')]>=1){
-				detectionHash[(result.codeResult.code,'normal')]=detectionHash[(result.codeResult.code,'normal')]+1;
+                barcodeErrors.sort(function(a, b){return a-b});
+                median=barcodeErrors[Math.floor(barcodeErrors.length/2)+1];
+		maximum=Math.max.apply(null, barcodeErrors);
+		minimum=Math.min.apply(null, barcodeCodes);
+		mean = barcodeErrors => barcodeErrors.reduce((a,b) => a + b, 0) / barcodeErrors.length;
+		if (maximum <0.15 and minimum<>-1){
+			 if (median<=0.10) {
+			 console.log(result.codeResult);
+			     if (detectionHash[(result.codeResult.code,'median')]>=1){
+				detectionHash[(result.codeResult.code,'median')]=detectionHash[(result.codeResult.code,'median')]+1;
+			     }
+			     else
+			     {
+				detectionHash[(result.codeResult.code,'median')]=1;
+			     }
+
 			 }
-			 else
-			 {
-				detectionHash[(result.codeResult.code,'normal')]=1;
+			 if (mean<=0.05 && median<=0.12) {//la idea es agregar criterios adicionales
+			     if (detectionHash[(result.codeResult.code,'mean')]>=1){
+				detectionHash[(result.codeResult.code,'mean')]=detectionHash[(result.codeResult.code,'mean')]+1;
+			     }
+			     else
+			     {
+				detectionHash[(result.codeResult.code,'mean')]=1;
+			     }
+
 			 }
-		 }
+			 if (maximum<=0.08) {
+			     if (detectionHash[(result.codeResult.code,'maximum')]>=1){
+				detectionHash[(result.codeResult.code,'maximum')]=detectionHash[(result.codeResult.code,'maximum')]+1;
+			     }
+			     else
+			     {
+				detectionHash[(result.codeResult.code,'maximum')]=1;
+			     }
+
+			 }
+			 if (median <=0.01){ //la idea es que se pueda tomar un criterio cuando la mediana es mayor.
+				 if (detectionHash[(result.codeResult.code,'normal')]>=1){
+					detectionHash[(result.codeResult.code,'normal')]=detectionHash[(result.codeResult.code,'normal')]+1;
+				 }
+				 else
+				 {
+					detectionHash[(result.codeResult.code,'normal')]=1;
+				 }
+			 }
+		}
 
                 if(detectionHash[(result.codeResult.code,'median')] >= 5 || detectionHash[(result.codeResult.code,'maximum')]>=2 || 
 		   detectionHash[(result.codeResult.code,'mean')]>=10 || detectionHash[(result.codeResult.code,'normal')]>=20) {
