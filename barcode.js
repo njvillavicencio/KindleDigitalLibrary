@@ -240,7 +240,7 @@ $(document).ready(function(){
                 var median;
 		var maximum;
 		var mean;
-		console.log(result.codeResult);
+		
                 for (var i=1; i<=result.codeResult.decodedCodes.length-1;i++){
                     codeErrors.push(result.codeResult.decodedCodes[i].error);
                 }              
@@ -249,6 +249,7 @@ $(document).ready(function(){
 		maximum=Math.max.apply(null, codeErrors);
 		mean = codeErrors => codeErrors.reduce((a,b) => a + b, 0) / codeErrors.length;
                  if (median<=0.10) {
+alert(result.codeResult);
 		     if (detectionHash[(result.codeResult.code,'median')]>=1){
                         detectionHash[(result.codeResult.code,'median')]=detectionHash[(result.codeResult.code,'median')]+1;
                      }
