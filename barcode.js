@@ -242,17 +242,22 @@ $(document).ready(function(){
 		var maximum;
 		var mean;
 		var minimum;
+		var barcodeBadCodes=0;
 		
                 for (var i=1; i<=result.codeResult.decodedCodes.length-1;i++){
                     barcodeErrors.push(result.codeResult.decodedCodes[i].error);
 		    barcodeCodes.push(result.codeResult.decodedCodes[i].code);
+		    if (result.codeResult.decodedCodes[i].code==-1) {
+			barcodeBadCodes=barcodeBadCodes+1;
+		    }
+		    
                 }              
                 barcodeErrors.sort(function(a, b){return a-b});
                 median=barcodeErrors[Math.floor(barcodeErrors.length/2)+1];
 		maximum=Math.max.apply(null, barcodeErrors);
 		minimum=Math.min.apply(null, barcodeCodes);
 		mean = barcodeErrors => barcodeErrors.reduce((a,b) => a + b, 0) / barcodeErrors.length;
-		if (maximum <=1 && minimum!=-1){
+		if (maximum <=1 && barcodeBadCodes/barcodeErrors.length<=0.15){
 			 if (median<=0.10) {
 			 console.log(result.codeResult);
 			     if (detectionHash[(result.codeResult.code,'median')]>=1){
