@@ -240,7 +240,7 @@ $(document).ready(function(){
                 var median;
 		var maximum;
 		var mean;
-		console.log(result.codeResult.decodedCodes);
+		console.log(result.codeResult);
                 for (var i=1; i<=result.codeResult.decodedCodes.length-1;i++){
                     codeErrors.push(result.codeResult.decodedCodes[i].error);
                 }              
