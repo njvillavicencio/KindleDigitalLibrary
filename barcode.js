@@ -252,7 +252,7 @@ $(document).ready(function(){
 		maximum=Math.max.apply(null, barcodeErrors);
 		minimum=Math.min.apply(null, barcodeCodes);
 		mean = barcodeErrors => barcodeErrors.reduce((a,b) => a + b, 0) / barcodeErrors.length;
-		if (maximum <0.15 and minimum<>-1){
+		if (maximum <=0.15 && minimum<>-1){
 			 if (median<=0.10) {
 			 console.log(result.codeResult);
 			     if (detectionHash[(result.codeResult.code,'median')]>=1){
