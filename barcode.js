@@ -223,7 +223,6 @@ $(document).ready(function(){
 //-----escaner
 
         function escanear(){
-		console.log(baseDatos);
                 getEscaner();
                 document.getElementById('escaner').style.display = 'block';
                 document.getElementById('escanear').style.display = 'none';
