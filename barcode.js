@@ -121,6 +121,7 @@ $(document).ready(function(){
 				if (!(codigo in baseDatos)){ 
 					baseDatos[codigo]=descripcion;
 					balanceStock[codigo]=cantidad;
+					console.log(baseDatos);
 				}
 				else {
 					balanceStock[codigo]=balanceStock[codigo]+cantidad;
@@ -165,7 +166,6 @@ $(document).ready(function(){
 		} 
 	   	else {
 			balanceStock[codigo]=balanceStock[codigo]+cantidad;
-			console.log(balanceStock[codigo]);
 		}
    }
 	
