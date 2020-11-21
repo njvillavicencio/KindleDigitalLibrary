@@ -165,7 +165,8 @@
     
     function addRow(baseDatos,balanceStock) { 
      var codigos = Object.keys(baseDatos);
-           console.log(codigos);
+      console.log(baseDatos);
+           console.log(Object.keys(baseDatos));
 
      var table = document.getElementById("dataTable");
      for (var i = 0; i < codigos.length; i++) {
