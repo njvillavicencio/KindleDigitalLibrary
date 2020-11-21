@@ -99,7 +99,6 @@
                             <tr>
                                 <th>Código</th>
                                 <th>Descripción</th>
-                                <th>Categoría</th>
                                 <th>Cantidad</th>
                             </tr>
                         </thead>
@@ -107,18 +106,10 @@
                             <tr>
                                 <th>Código</th>
                                 <th>Descripción</th>
-                                <th>Categoría</th>
                                 <th>Cantidad</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            
-                            <tr>
-                                <td>12001819</td>
-                                <td>Cuaderno rojo 100 hojas</td>
-                                <td>Escolar</td>
-                                <td>1</td>
-                            </tr>
                             
                         </tbody>
                     </table>
@@ -158,35 +149,10 @@
     function updateSigninStatus(isSignedIn) {
       if (isSignedIn) {  
         obtenerDatosApp();
-        console.log(baseDatos);
-        addRow();
+        llenarTabla();
       } 
     }
-    
-    
-    function addRow() { 
-      var baseDatos={"1":"perrito", "2":"jaguar"};
-      var balanceStock={"1":3, "2":0};
-     var table = document.getElementById("dataTable");
-     for (var codigo in baseDatos) {
-         var this_tr = document.createElement("tr");
-         var this_td = document.createElement("td");
-         var text = document.createTextNode(codigo);
-         this_td.appendChild(text);
-         this_tr.appendChild(this_td);
-       
-         var this_td = document.createElement("td");
-         var text = document.createTextNode(baseDatos[codigo]);
-         this_td.appendChild(text);
-         this_tr.appendChild(this_td);
-         table.appendChild(this_tr);
-       
-         var this_td = document.createElement("td");
-         var text = document.createTextNode(balanceStock[codigo]);
-         this_td.appendChild(text);
-         this_tr.appendChild(this_td);
-     }
-}
+
   </script>
 
       
