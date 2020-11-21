@@ -119,7 +119,7 @@ $(document).ready(function(){
 				var descripcion = datos[i][1];
 				var cantidad = parseInt(datos[i][2]);
 				if (!(codigo in baseDatos)){ 
-					baseDatos[codigo]=descripcion
+					baseDatos[codigo]=descripcion;
 					balanceStock[codigo]=cantidad;
 				}
 				else {
