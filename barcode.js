@@ -223,6 +223,7 @@ $(document).ready(function(){
 //-----escaner
 
         function escanear(){
+		console.log(baseDatos);
                 getEscaner();
                 document.getElementById('escaner').style.display = 'block';
                 document.getElementById('escanear').style.display = 'none';
@@ -283,7 +284,6 @@ $(document).ready(function(){
 		mean = barcodeErrors => barcodeErrors.reduce((a,b) => a + b, 0) / barcodeErrors.length;
 		if (maximum <=1 && barcodeBadCodes/barcodeErrors.length<=0.15){
 			 if (median<=0.10) {
-			 console.log(result.codeResult);
 			     if (detectionHash[(result.codeResult.code,'median')]>=1){
 				detectionHash[(result.codeResult.code,'median')]=detectionHash[(result.codeResult.code,'median')]+1;
 			     }
