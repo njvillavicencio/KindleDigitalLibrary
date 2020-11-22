@@ -208,17 +208,18 @@ $(document).ready(function(){
          var text = document.createTextNode(codigo);
          this_td.appendChild(text);
          this_tr.appendChild(this_td);
-	 this_tbody.appendChild(this_tr);
+
        
          var this_td = document.createElement("td");
          var text = document.createTextNode(baseDatos[codigo]);
          this_td.appendChild(text);
          this_tr.appendChild(this_td);
-         this_tbody.appendChild(this_tr);
        
          var this_td = document.createElement("td");
          var text = document.createTextNode(balanceStock[codigo]);
          this_td.appendChild(text);
+	 this_tr.appendChild(this_td);
+	     
          this_tbody.appendChild(this_tr);
      }
 }
