@@ -197,28 +197,29 @@ $(document).ready(function(){
       });
     }
 
-
-    
-    
     function llenarTabla() { 
      var table = document.getElementById("dataTable");
-     for (var codigo in baseDatos) {
+     var this_tbody = document.createElement('tbody');
+     table.appendChiled(this_tbody);
+     for (var codigo in baseDatos) {     
          var this_tr = document.createElement("tr");
+	     
          var this_td = document.createElement("td");
          var text = document.createTextNode(codigo);
          this_td.appendChild(text);
          this_tr.appendChild(this_td);
+	 this_tbody.appendChild(this_tr);
        
          var this_td = document.createElement("td");
          var text = document.createTextNode(baseDatos[codigo]);
          this_td.appendChild(text);
          this_tr.appendChild(this_td);
-         table.appendChild(this_tr);
+         this_tbody.appendChild(this_tr);
        
          var this_td = document.createElement("td");
          var text = document.createTextNode(balanceStock[codigo]);
          this_td.appendChild(text);
-         this_tr.appendChild(this_td);
+         this_tbody.appendChild(this_tr);
      }
 }
 
