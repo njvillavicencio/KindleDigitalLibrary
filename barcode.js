@@ -200,7 +200,7 @@ $(document).ready(function(){
     function llenarTabla() { 
      var table = document.getElementById("dataTable");
      var this_tbody = document.createElement('tbody');
-     table.appendChiled(this_tbody);
+     table.appendChild(this_tbody);
      for (var codigo in baseDatos) {     
          var this_tr = document.createElement("tr");
 	     
