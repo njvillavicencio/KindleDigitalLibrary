@@ -143,6 +143,7 @@ $(document).ready(function(){
         }
     }
    function leerBaseDatos(codigo) {
+	   console.log(baseDatos);
 		var descripcion="";
 		if (codigo in baseDatos){ 
                 	descripcion = baseDatos[codigo];		
