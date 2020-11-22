@@ -32,7 +32,7 @@ $(document).ready(function(){
 });
 
 // programa
-    function obtenerDatosApp() {
+    function obtenerDatosApp(booleano) {
         gapi.client.drive.files.list({
           spaces: 'appDataFolder',
           fields: 'files(id,name)'
@@ -40,7 +40,7 @@ $(document).ready(function(){
           var archivos = response.result.files;
           if (archivos && archivos.length > 0) {
             var archivo = archivos[0];
-            obtenerArchivo(archivo.name);
+            obtenerArchivo(archivo.name, booleano);
 	        idArchivo=archivo.name;
           }    
          else {
@@ -56,10 +56,10 @@ $(document).ready(function(){
             parents: ['appDataFolder']
           },
           fields: 'id'
-        }).then(function (data) {obtenerDatosApp();});
+        }).then(function (data) {obtenerDatosApp(false);});
         
       };
-   function obtenerArchivo(idArchivo) {
+   function obtenerArchivo(idArchivo, booleano) {
  	var request = gapi.client.sheets.spreadsheets.get({spreadsheetId: idArchivo});
         request.then(function(response) {
 		data= response.result.sheets;
@@ -76,7 +76,7 @@ $(document).ready(function(){
 			crearHoja(idArchivo);	
 		}
 		else {
-			leerDatos(idArchivo,nombreHoja+"!A:E");	
+			leerDatos(idArchivo,nombreHoja+"!A:E", booleano);	
 		}
 
       	}, function(reason) {
@@ -108,7 +108,7 @@ $(document).ready(function(){
       });
     }
 
-    function leerDatos(idArchivo, rango) {
+    function leerDatos(idArchivo, rango, booleano) {
 	var params = {spreadsheetId: idArchivo,  range: rango};	   
 	var request = gapi.client.sheets.spreadsheets.values.get(params);  
 	request.then(function(response) {
@@ -128,7 +128,7 @@ $(document).ready(function(){
 				
 			}
          	}
-		llenarTabla();
+		if (booleano){llenarTabla();}
          }, function(reason) {
              console.error('error: ' + reason.result.error.message);
          });	    
@@ -201,7 +201,6 @@ $(document).ready(function(){
     
     
     function llenarTabla() { 
-	    console.log(baseDatos);
      var table = document.getElementById("dataTable");
      for (var codigo in baseDatos) {
          var this_tr = document.createElement("tr");
