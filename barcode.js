@@ -128,6 +128,7 @@ $(document).ready(function(){
 				
 			}
          	}
+		llenarTabla();
          }, function(reason) {
              console.error('error: ' + reason.result.error.message);
          });	    
@@ -200,6 +201,7 @@ $(document).ready(function(){
     
     
     function llenarTabla() { 
+	    console.log(baseDatos);
      var table = document.getElementById("dataTable");
      for (var codigo in baseDatos) {
          var this_tr = document.createElement("tr");
